@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hmrc/gov_talk/xml_section/version'
+require 'hmrc/gov_talk/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "xml-section"
-  spec.version       = HMRC::GovTalk::XmlSection::VERSION
+  spec.name          = "govtalk"
+  spec.version       = HMRC::GovTalk::VERSION
   spec.authors       = ["Harry Mills"]
   spec.email         = ["harry@freeagent.com"]
   spec.summary       = %q{TODO: Write a short summary. Required.}

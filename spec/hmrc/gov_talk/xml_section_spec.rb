@@ -1,8 +1,8 @@
 require 'minitest_helper'
 
-describe XmlSection do
+describe HMRC::GovTalk::XmlSection do
   it "should have a version number" do
-    ::XmlSection::VERSION.wont_be_nil
+    ::HMRC::GovTalk::XmlSection::VERSION.wont_be_nil
   end
 
   it "should do something useful" do

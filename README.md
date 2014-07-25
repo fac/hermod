@@ -76,6 +76,11 @@ xml = Payroll::RTI::Employee::Details.new do |details|
 end)
 ```
 
+Nodes are defined in the builder in the order they will be sent to HMRC. They
+can then be called in any order when using the class. Calling the same method
+multiple times will add multiple instances of that node and they will be output
+in the order the calls were made in.
+
 ### Supported Types
 
 The following types of XML node are supported:
@@ -194,6 +199,18 @@ value is passed a `Hermod::InvalidInputError` exception will be raised.
 **Optional**
 For monetary nodes the `optional` option will also prevent zero values from
 being submitted.
+
+#### Parent Nodes
+
+Parent nodes are the way you specify that the contents of this node is another
+`XmlSection`. The `xml_name` is ignored (whether you supply it or rely on the
+default) so the given `symbolic_name` is just the name of the method you call
+to add content. Instead the node name is picked up from the class name of the
+XmlSection you add as a child.
+
+### Attibutes
+
+TODO
 
 ## Contributing
 

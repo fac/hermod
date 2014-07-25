@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hmrc/gov_talk/version'
+require 'hermod/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "govtalk"
-  spec.version       = HMRC::GovTalk::VERSION
+  spec.name          = "hermod"
+  spec.version       = Hermod::VERSION
   spec.authors       = ["Harry Mills"]
   spec.email         = ["harry@freeagent.com"]
   spec.summary       = %q{Makes it easier to talk to the Government Gateway used by HMRC.}

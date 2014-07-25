@@ -39,35 +39,35 @@ module Hermod
           ordering.repeated "gamma"
           ordering.first "alpha"
         end
+      end
 
-        it "should order nodes by the order they were defined when the class was built" do
-          node_by_index(0).name.must_equal "First"
-          node_by_index(0).content.must_equal "alpha"
+      it "should order nodes by the order they were defined when the class was built" do
+        node_by_index(0).name.must_equal "First"
+        node_by_index(0).content.must_equal "alpha"
 
-          node_by_index(1).name.must_equal "Repeated"
-          node_by_index(1).content.must_equal "beta"
+        node_by_index(1).name.must_equal "Repeated"
+        node_by_index(1).content.must_equal "beta"
 
-          node_by_index(-1).name.must_equal "Last"
-          node_by_index(-1).content.must_equal "epsilon"
-        end
+        node_by_index(-1).name.must_equal "Last"
+        node_by_index(-1).content.must_equal "epsilon"
+      end
 
-        it "should order nodes called multiple times in the order they were called" do
-          node_by_index(1).name.must_equal "Repeated"
-          node_by_index(1).content.must_equal "beta"
+      it "should order nodes called multiple times in the order they were called" do
+        node_by_index(1).name.must_equal "Repeated"
+        node_by_index(1).content.must_equal "beta"
 
-          node_by_index(2).name.must_equal "Repeated"
-          node_by_index(2).content.must_equal "gamma"
-        end
+        node_by_index(2).name.must_equal "Repeated"
+        node_by_index(2).content.must_equal "gamma"
+      end
 
-        it "should order nodes at XML generation time, not at call time" do
-          subject.repeated "delta"
+      it "should order nodes at XML generation time, not at call time" do
+        subject.repeated "delta"
 
-          node_by_index(3).name.must_equal "Last"
-          node_by_index(4).content.must_equal "epsilon"
+        node_by_index(-2).name.must_equal "Repeated"
+        node_by_index(-2).content.must_equal "delta"
 
-          node_by_index(4).name.must_equal "Last"
-          node_by_index(4).content.must_equal "epsilon"
-        end
+        node_by_index(-1).name.must_equal "Last"
+        node_by_index(-1).content.must_equal "epsilon"
       end
     end
   end

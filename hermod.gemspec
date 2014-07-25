@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Hermod::VERSION
   spec.authors       = ["Harry Mills"]
   spec.email         = ["harry@freeagent.com"]
-  spec.summary       = %q{Makes it easier to talk to the Government Gateway used by HMRC.}
+  spec.summary       = %q{A Ruby library for talking to the HMRC Government Gateway.}
   spec.description   = %q{A Ruby library for talking to the HMRC Government Gateway.
   This provides a builder for creating classes that can generate the XML needed complete with type information and
   runtime validation.}

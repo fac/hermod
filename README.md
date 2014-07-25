@@ -477,7 +477,7 @@ end
 </Example>
 ```
 
-### Attibutes
+### Attributes
 
 When you define a node you can 
 

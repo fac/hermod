@@ -30,57 +30,6 @@ will be sent to HMRC. This description includes type, validation, and format
 information as well as any runtime mutations that should be applied to inputs
 you provide.
 
-### Example
-
-This is all explained in more detail below but a reasonably complex XML section
-may be described as follows.
-
-```ruby
-Details = Hermod::XmlSection.build(xml_name: "EmployeeDetails", formats: Payroll::RTI::FORMATS) do |builder|
-  builder.string_node :ni_number, xml_name: "NINO", optional: true, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/,
-  input_mutator: (lambda do |value, attrs|
-  [value.delete(' ').upcase, attrs]
-  end)
-  builder.parent_node :name
-  builder.parent_node :address
-  builder.date_node   :date_of_birth, xml_name: "BirthDate", optional: true
-  builder.string_node :gender, allowable_values: %w(Male Female),
-  input_mutator: (lambda do |input, attrs|
-  [input == AppConstants::MALE ? Payroll::RTI::MALE : Payroll::RTI::FEMALE, attrs]
-  end)
-end
-```
-
-This creates a class that can be used like so.
-
-```ruby
-xml = Payroll::RTI::Employee::Details.new do |details|
-  details.name(Payroll::RTI::Name.new do |name|
-    name.title employee.title
-    employee.forenames.each do |forename|
-      name.forename forename
-    end
-    name.surname employee.last_name
-  end)
-  details.gender employee.gender
-
-  details.address(Address.new do |address|
-    employee.address_lines.each do |line|
-      address.line line
-    end
-    address.postcode profile.postcode
-  end)
-
-  details.ni_number employee.ni_number
-  details.date_of_birth employee.date_of_birth
-end)
-```
-
-Nodes are defined in the builder in the order they will be sent to HMRC. They
-can then be called in any order when using the class. Calling the same method
-multiple times will add multiple instances of that node and they will be output
-in the order the calls were made in.
-
 ### Supported Types
 
 The following types of XML node are supported:
@@ -477,9 +426,56 @@ end
 </Example>
 ```
 
-### Attributes
+### Full Example
 
-When you define a node you can 
+This is all explained in more detail below but a reasonably complex XML section
+may be described as follows.
+
+```ruby
+Details = Hermod::XmlSection.build(xml_name: "EmployeeDetails", formats: Payroll::RTI::FORMATS) do |builder|
+  builder.string_node :ni_number, xml_name: "NINO", optional: true, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/,
+  input_mutator: (lambda do |value, attrs|
+  [value.delete(' ').upcase, attrs]
+  end)
+  builder.parent_node :name
+  builder.parent_node :address
+  builder.date_node   :date_of_birth, xml_name: "BirthDate", optional: true
+  builder.string_node :gender, allowable_values: %w(Male Female),
+  input_mutator: (lambda do |input, attrs|
+  [input == AppConstants::MALE ? Payroll::RTI::MALE : Payroll::RTI::FEMALE, attrs]
+  end)
+end
+```
+
+This creates a class that can be used like so.
+
+```ruby
+xml = Payroll::RTI::Employee::Details.new do |details|
+  details.name(Payroll::RTI::Name.new do |name|
+    name.title employee.title
+    employee.forenames.each do |forename|
+      name.forename forename
+    end
+    name.surname employee.last_name
+  end)
+  details.gender employee.gender
+
+  details.address(Address.new do |address|
+    employee.address_lines.each do |line|
+      address.line line
+    end
+    address.postcode profile.postcode
+  end)
+
+  details.ni_number employee.ni_number
+  details.date_of_birth employee.date_of_birth
+end)
+```
+
+Nodes are defined in the builder in the order they will be sent to HMRC. They
+can then be called in any order when using the class. Calling the same method
+multiple times will add multiple instances of that node and they will be output
+in the order the calls were made in.
 
 ## Contributing
 

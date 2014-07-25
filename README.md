@@ -120,7 +120,9 @@ end
 
 *The Resulting XML*
 ```xml
-<Example>AB123456C</Example>
+<Example>
+  <NINumber>AB123456C</NINumber>
+</Example>
 ```
 
 **Attributes**
@@ -144,7 +146,9 @@ end
 
 *The Resulting XML*
 ```xml
-<Example WeekOneMonthOne="yes">1000L</Example>
+<Example>
+  <TaxCode WeekOneMonthOne="yes">1000L</TaxCode>
+</Example>
 ```
 
 **Optional**
@@ -180,18 +184,43 @@ The `matches` option allows you to provide a regular expression that is used to
 validate the input. If you try to pass a value that doesn't match the expression
 a `Hermod::InvalidInputError` will be raised.
 
+*Building an XmlSection*
 ```ruby
-builder.string_node :ni_number, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :ni_number, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/
+end
 ```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.ni_number "I can't remember it"
+end
+```
+
+*A `Hermod::InvalidInputError` will be raised*
+
 
 **Allowable Values**
 The `allowable_values` lets you specify a list of string that are allowed for
 this node. Passing a value not in this list will raise
 a `Hermod::InvalidInputError`.
 
+*Building an XmlSection*
 ```ruby
-builder.string_node :gender, allowable_values: %w(Male Female)
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :mood, allowable_values: %w(Happy Sad Hangry)
+end
 ```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.gender "Wrathful"
+end
+```
+
+*A `Hermod::InvalidInputError` will be raised*
 
 **Input Mutator**
 The `input_mutator` option allows you to provide a lambda that is provided with
@@ -200,9 +229,26 @@ any). This can be used to change either or both of these and the lambda must
 return both the value and the attributes as an array (`[value, attributes]`)
 after they've been modified.
 
+*Building an XmlSection*
 ```ruby
-builder.string_node :ni_number, xml_name: "NINO", optional: true, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/,
-  input_mutator: (lambda { |value, attrs| [value.delete(' ').upcase, attrs] })
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :ni_number, xml_name: "NINO", optional: true, matches: /\A[A-Z]{2}[0-9]{6}[A-D ]\z/,
+    input_mutator: (lambda { |value, attrs| [value.delete(' ').upcase, attrs] })
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.ni_number "AB 12 34 56 C"
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <NiNumber>AB123456C</NiNumber>
+</Example>
 ```
 
 #### Integer Nodes
@@ -215,9 +261,21 @@ You can specify a `range` option as a hash with a `min` and `max` value. If you
 provide a value outwith the range (inclusive) then
 a `Hermod::InvalidInputError` exception will be raised.
 
+*Building an XmlSection*
 ```ruby
-builder.integer_node :day_of_the_week, range: {min: 1, max: 7}
+Example = Hermod::XmlSection.build do |builder|
+  builder.integer_node :day_of_the_week, range: {min: 1, max: 7}
+end
 ```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.day_of_the_week 8
+end
+```
+
+*A `Hermod::InvalidInputError` will be raised*
 
 #### Date Nodes
 
@@ -227,6 +285,27 @@ option passed to the `Hermod::XmlSection.build` call. Anything that responds to
 `strftime` can be passed to the node. Anything else will cause an
 `Hermod::InvalidInputError` exception to be raised.
 
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build(formats: {date: "%Y-%m-%d"}) do |builder|
+  builder.date_node :date_of_birth
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.date_of_birth Date.new(1988, 8, 13)
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <DateOfBirth>1988-08-13</DateOfBirth>
+</Example>
+```
+
 #### Yes Nodes
 
 Yes nodes allow you to send a boolean value to HMRC provided that value is
@@ -234,10 +313,57 @@ true. Nothing will be sent if the value is false. This pattern is commonly used
 by HMRC for optional boolean nodes. They're known as "yes nodes" because HMRC
 use "yes" and "no" in place of true and false in their XML.
 
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.yes_node :verily
+  builder.yes_node :nae
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.verily true
+  example.nae false
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <Verily>yes</Verily>
+</Example>
+```
+
 #### Yes/No Nodes
 
 This works in a similar fashion to the yes nodes described above but if a false
 value is provided a "no" will be sent instead of the node being excluded.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.yes_no_node :verily
+  builder.yes_no_node :nae
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.verily true
+  example.nae false
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <Verily>yes</Verily>
+  <Nae>no</Nae>
+</Example>
+```
 
 #### Monetary Nodes
 
@@ -250,14 +376,69 @@ passed to monetary nodes should be BigDecimal objects.
 By default negative numbers are allowed. If you need to prevent them you can
 set the `negative` option to false.
 
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build(formats: {money: "%.2f"}) do |builder|
+  builder.monetary_node :taxable_pay, negative: false
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.taxable_pay BigDecimal.new("-300")
+end
+```
+
+*A `Hermod::InvalidInputError` will be raised*
+
 **Whole Units**
 Sometimes HMRC require that you send through a value as a whole unit. If this
 is the case you can set the `whole_units` option to true and if an invalid
 value is passed a `Hermod::InvalidInputError` exception will be raised.
 
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build(formats: {money: "%.2f"}) do |builder|
+  builder.monetary_node :lower_earnings_limit, whole_units: true
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.lower_earnings_limit BigDecimal.new("153.49")
+end
+```
+
+*A `Hermod::InvalidInputError` will be raised*
+
 **Optional**
 For monetary nodes the `optional` option will also prevent zero values from
 being submitted.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build(formats: {money: "%.2f"}) do |builder|
+  builder.monetary_node :taxable_pay
+  builder.monetary_node :tax, optional: true
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.taxable_pay BigDecimal.new("1000")
+  example.tax BigDecimal.new("0")
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <TaxablePay>1000.00</TaxablePay>
+</Example>
+```
 
 #### Parent Nodes
 
@@ -266,6 +447,35 @@ Parent nodes are the way you specify that the contents of this node is another
 default) so the given `symbolic_name` is just the name of the method you call
 to add content. Instead the node name is picked up from the class name of the
 XmlSection you add as a child.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.parent_node :inner
+end
+
+Inside = Hermod::XmlSection.build do |builder|
+  builder.string_node :text"
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.inner(Inside.new do |inside|
+    inside.text "Hello, World"
+  end)
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <Inside>
+    <Text>Hello, World</Text>
+  </Inside>
+</Example>
+```
 
 ### Attibutes
 

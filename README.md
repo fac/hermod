@@ -104,10 +104,69 @@ name from `snake_case` to `TitleCase`. For example, the `date_of_birth` node in
 the example above would become `DateOfBirth`. By providing an `xml_name` you
 can override this, thus changing it to `BirthDate`
 
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :ni_number, xml_name: "NINumber"
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.ni_number "AB123456C"
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>AB123456C</Example>
+```
+
+**Attributes**
+Any node can have attributes which are defined by passing a `Hash` of symbol,
+string pairs. The symbol is used to refer to the attribute when setting the
+value of the node and the string is the form that will be sent to HMRC.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :tax_code, attributes: {week_1_month_1: "WeekOneMonthOne"}
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.tax_code "1000L", week_1_month_1: true
+end
+```
+
+*The Resulting XML*
+```xml
+<Example WeekOneMonthOne="yes">1000L</Example>
+```
+
 **Optional**
 Not all nodes allow this but for those that do (String, Date and Monetary nodes)
 if a node is marked as optional then any blank values (like nil or an empty
 string) will be ignored.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build do |builder|
+  builder.string_node :middle_name, optional: true
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.middle_name nil
+end
+```
+
+*No XML will be produced*
 
 #### String Nodes
 
@@ -210,7 +269,7 @@ XmlSection you add as a child.
 
 ### Attibutes
 
-TODO
+When you define a node you can 
 
 ## Contributing
 

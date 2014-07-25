@@ -7,20 +7,23 @@ module Hermod
 
     attr_reader :name, :value, :attributes
 
-    # Internal: creates a XmlNode. This is used by the XmlSection node method and
-    # you should probably use that instead.
+    # Internal: creates a XmlNode. This is used by the XmlSectionBuilder's node
+    # building methods and should not be called manually.
     #
     # name       - the name of the node as it appears in the XML
     # value      - the node contents as a string.
     # attributes - a Hash of attributes as Symbol -> value pairs. The symbol
-    #              must be in ATTRIBUTE_NAMES.
+    #              must be in the list of attributes allowed for the node as
+    #              set in the builder.
     def initialize(name, value, attributes={})
       @name = name
       @value = value
       @attributes = attributes
     end
 
-    # Internal: turns the XmlNode into an XML::Node
+    # Internal: turns the XmlNode into an XML::Node including any attributes
+    # without any sanitisation (currently - this may change in a future
+    # version).
     #
     # Returns an XML::Node built from the XmlNode object.
     def to_xml
@@ -35,15 +38,16 @@ module Hermod
       end
     end
 
-    # Public: replaces symbol attributes with strings looked up in the provided
+    # Internal: replaces symbol attributes with strings looked up in the provided
     # hash
     #
     # lookup_hash - the hash to use to convert symbols to strings HMRC recognise
     #
-    # Returns self
+    # Returns self so it can be used in a call chain (This may change in
+    # future)
     def rename_attributes(lookup_hash)
       attributes.keys.each do |attribute|
-        attributes[lookup_hash.fetch(attribute)] = sanitize_attribute(attributes.delete(attribute))
+        attributes[lookup_hash.fetch(attribute)] = sanitise_attribute(attributes.delete(attribute))
       end
       self
     end

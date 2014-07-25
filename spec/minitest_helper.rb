@@ -47,13 +47,11 @@ end
 # xml_payload - The XMLSection object you want to test
 # node_name   - xml node name, for example: NIletter
 def nodes(node_name)
-  xml_payload = (subject.respond_to?(:to_xml) ? subject.to_xml : subject)
-  Nokogiri.XML(xml_payload.to_s).remove_namespaces!.css(node_name)
+  Nokogiri.XML(subject.to_xml.to_s).remove_namespaces!.css(node_name)
 end
 
 def node_by_index(index)
-  xml_payload = (subject.respond_to?(:to_xml) ? subject.to_xml : subject)
-  xml_payload[index]
+  subject.to_xml.to_a[index]
 end
 
 # Public: Returns a hash of attributes on the node with the given name

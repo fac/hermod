@@ -77,7 +77,10 @@ module Hermod
     #
     # Returns a Hash
     def self.formats
-      @formats ||= {}
+      @formats ||= {
+        date: "%Y-%m-%d",
+        money: "%.2f"
+      }
     end
 
     # Internal: provides access to the hash of nodes where the default for an

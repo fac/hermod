@@ -54,7 +54,7 @@ module Hermod
     #         setting up descendents.
     def initialize(attributes={}, &block)
       @attributes = attributes
-      yield self
+      yield self if block_given?
     end
 
     class << self

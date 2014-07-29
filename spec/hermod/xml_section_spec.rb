@@ -9,11 +9,15 @@ module Hermod
     builder.string_node :repeated
     builder.string_node :last
   end
+  FormattedXML = XmlSection.build do |builder|
+    builder.date_node :birthday
+    builder.monetary_node :allowance
+  end
 
   describe XmlSection do
     describe "building an XML generating class with no arguments" do
       subject do
-        UnnamedXML.new {}
+        UnnamedXML.new
       end
 
       it "should use the class name as the XML node name" do
@@ -23,11 +27,28 @@ module Hermod
 
     describe "building an XML generating class with a custom node name" do
       subject do
-        NamedXML.new {}
+        NamedXML.new
       end
 
       it "should use the class name as the XML node name" do
         subject.to_xml.name.must_equal "Testing"
+      end
+    end
+
+    describe "default formats" do
+      subject do
+        FormattedXML.new do |formatted|
+          formatted.birthday Date.new(1988, 8, 13)
+          formatted.allowance BigDecimal.new("20")
+        end
+      end
+
+      it "formats dates in yyyy-mm-dd form" do
+        value_of_node("Birthday").must_equal("1988-08-13")
+      end
+
+      it "formats money to two decimal places" do
+        value_of_node("Allowance").must_equal("20.00")
       end
     end
 

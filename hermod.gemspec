@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   This provides a builder for creating classes that can generate the XML needed complete with type information and
   runtime validation.}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "Apache License, Version 2.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }

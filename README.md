@@ -1,5 +1,8 @@
 # Hermod
 
+[![Code
+Climate](https://codeclimate.com/github/fac/hermod/badges/gpa.svg)](https://codeclimate.com/github/fac/hermod)
+
 This gem makes it easier to talk to HMRC through the [Government Gateway][1] by
 providing a DSL you can use to create Ruby classes to build the XML required in
 a form that meets HMRC's specification.

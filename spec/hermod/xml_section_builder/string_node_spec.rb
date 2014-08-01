@@ -33,7 +33,7 @@ module Hermod
 
       it "should raise an error when the regex validation fails" do
         ex = proc { subject.title "Laird" }.must_raise InvalidInputError
-        ex.message.must_equal %{Value "Laird" for title doesn't match /\\ASir|Dame\\z/}
+        ex.message.must_equal "title must match \\ASir|Dame\\z and Laird doesn't"
       end
 
       it "should require all non-optional nodes to have content" do
@@ -53,7 +53,7 @@ module Hermod
 
       it "should raise an error if the value is not in the list of allowed values" do
         ex = proc { subject.mood "Jubilant" }.must_raise InvalidInputError
-        ex.message.must_equal %{"Jubilant" is not in the list of allowed values for mood: ["Happy", "Sad", "Hangry"]}
+        ex.message.must_equal "mood must be one of Happy, Sad, and Hangry, not Jubilant"
       end
 
       it "should use the given keys for attributes" do
@@ -63,7 +63,7 @@ module Hermod
       end
 
       it "should raise an error if given an attribute that isn't expected" do
-        proc { subject.title "Sir", knight: "yes" }.must_raise KeyError
+        proc { subject.title "Sir", knight: "yes" }.must_raise InvalidInputError
       end
     end
   end

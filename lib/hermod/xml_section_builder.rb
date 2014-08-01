@@ -68,7 +68,9 @@ module Hermod
         end
 
         value, attributes = instance_exec(value, attributes, &block)
-        nodes[name] << XmlNode.new(xml_name, value.to_s, attributes).rename_attributes(options[:attributes])
+        if value.present?
+          nodes[name] << XmlNode.new(xml_name, value.to_s, attributes).rename_attributes(options[:attributes])
+        end
       end
     end
 
@@ -133,40 +135,28 @@ module Hermod
     # Public: defines a node for sending a boolean to HMRC. It will only be
     # sent if the boolean is true.
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def yes_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
-
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        if value
-          nodes[symbolic_name] << XmlNode.new(xml_name, YES, attributes).rename_attributes(options[:attributes]) if value.present?
-      end
+    def yes_node(name, options={})
+      create_method(name, [], [], options) do |value, attributes|
+        [(value ? YES : nil), attributes]
       end
     end
 
     # Public: defines a node for sending a boolean to HMRC. A "yes" will be
     # sent if it's true and a "no" will be sent if it's false
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def yes_no_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
-
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        nodes[symbolic_name] << XmlNode.new(xml_name, value ? YES : NO, attributes).rename_attributes(options[:attributes])
+    def yes_no_node(name, options={})
+      create_method(name, [], [], options) do |value, attributes|
+        [(value ? YES : NO), attributes]
       end
     end
 

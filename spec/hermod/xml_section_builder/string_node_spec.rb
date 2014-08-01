@@ -18,7 +18,6 @@ module Hermod
       subject do
         StringXml.new do |string_xml|
           string_xml.greeting "Hello"
-          string_xml.name "World"
         end
       end
 
@@ -64,6 +63,11 @@ module Hermod
 
       it "should raise an error if given an attribute that isn't expected" do
         proc { subject.title "Sir", knight: "yes" }.must_raise InvalidInputError
+      end
+
+      it "should not include empty, optional nodes" do
+        subject.name ""
+        nodes("Name").must_be_empty
       end
     end
   end

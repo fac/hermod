@@ -57,30 +57,9 @@ module Hermod
       @new_class
     end
 
-    def create_method(name, mutators, validators, options = {}, &block)
-      raise DuplicateNodeError, "#{name} is already defined" if @node_order.include? name
-      @node_order << name
-      xml_name = options.fetch(:xml_name, name.to_s.camelize)
-
-      @new_class.send :define_method, name do |value, attributes = {}|
-        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes) }
-        begin
-          validators.each { |validator| validator.valid?(value, attributes) }
-        rescue InvalidInputError => ex
-          raise InvalidInputError, "#{name} #{ex.message}"
-        end
-
-        value, attributes = instance_exec(value, attributes, &block)
-        if value.present?
-          nodes[name] << XmlNode.new(xml_name, value, attributes).rename_attributes(options[:attributes])
-        end
-      end
-    end
-
     # Public: defines a node for sending a string to HMRC
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -101,8 +80,7 @@ module Hermod
 
     # Public: defines a node for sending an integer to HMRC
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -119,8 +97,7 @@ module Hermod
 
     # Public: defines a node for sending a date to HMRC
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -138,8 +115,7 @@ module Hermod
     # Public: defines a node for sending a boolean to HMRC. It will only be
     # sent if the boolean is true.
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -152,8 +128,7 @@ module Hermod
     # Public: defines a node for sending a boolean to HMRC. A "yes" will be
     # sent if it's true and a "no" will be sent if it's false
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -165,15 +140,11 @@ module Hermod
 
     # Public: defines a node for sending a monetary value to HMRC
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
     def monetary_node(name, options={})
-      # mutators = [].tap do |mutators|
-      #   mutators << InputMutator.new(proc { |value, attributes| [value || 0, attributes] })
-      # end
       validators = [].tap do |validators|
         validators << Validators::NonNegative.new unless options.fetch(:negative, true)
         validators << Validators::WholeUnits.new if options[:whole_units]
@@ -191,8 +162,7 @@ module Hermod
 
     # Public: defines an XML parent node that wraps other nodes
     #
-    # name    - the name of the node. This will become the name of the method
-    #           on the XmlSection.
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
     # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
@@ -201,5 +171,39 @@ module Hermod
         [value, attributes]
       end
     end
+
+    private
+
+    # Private: creates a method with a given name that uses a set of mutators
+    # and a set of validators to change and validate the input according to
+    # certain options. This is used to implement all the node type methods.
+    #
+    # name -       the name of the new method
+    # mutators -   an array of InputMutator objects (normally one) that change the value and attributes in some way
+    # validators - an array of Validator::Base subclasses that are applied to the value and attributes and raise
+    #              errors under given conditions
+    # block -      a block that takes the value and attributes and does any post-validation mutation on them
+    #
+    # Returns nothing you should rely on
+    def create_method(name, mutators, validators, options = {}, &block)
+      raise DuplicateNodeError, "#{name} is already defined" if @node_order.include? name
+      @node_order << name
+      xml_name = options.fetch(:xml_name, name.to_s.camelize)
+
+      @new_class.send :define_method, name do |value, attributes = {}|
+        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes) }
+        begin
+          validators.each { |validator| validator.valid?(value, attributes) }
+        rescue InvalidInputError => ex
+          raise InvalidInputError, "#{name} #{ex.message}"
+        end
+
+        value, attributes = instance_exec(value, attributes, &block)
+        if value.present?
+          nodes[name] << XmlNode.new(xml_name, value, attributes).rename_attributes(options[:attributes])
+        end
+      end
+    end
+
   end
 end

@@ -7,6 +7,7 @@ require 'hermod/xml_node'
 require 'hermod/input_mutator'
 require 'hermod/validators/allowed_values'
 require 'hermod/validators/attributes'
+require 'hermod/validators/is_a'
 require 'hermod/validators/range'
 require 'hermod/validators/regular_expression'
 require 'hermod/validators/value_presence'
@@ -66,7 +67,7 @@ module Hermod
           raise InvalidInputError, "#{name} #{ex.message}"
         end
 
-        value, attributes = block.call(value, attributes)
+        value, attributes = instance_exec(value, attributes, &block)
         nodes[name] << XmlNode.new(xml_name, value.to_s, attributes).rename_attributes(options[:attributes])
       end
     end
@@ -113,29 +114,19 @@ module Hermod
 
     # Public: defines a node for sending a date to HMRC
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def date_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
-
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        if value.blank?
-          if options[:optional]
-            return # Don't need to add an empty node
-          else
-            raise InvalidInputError, "#{symbolic_name} isn't optional but no value was provided"
-          end
+    def date_node(name, options={})
+      validators = [].tap do |validators|
+        validators << Validators::ValuePresence.new unless options.delete(:optional)
+        validators << Validators::IsA.new(Date) { |value| value.respond_to? :strftime }
       end
-      unless value.respond_to?(:strftime)
-        raise InvalidInputError, "#{symbolic_name} must be set to a date"
-      end
-      nodes[symbolic_name] << XmlNode.new(xml_name, value.strftime(format_for(:date)), attributes).rename_attributes(options[:attributes])
+
+      create_method(name, [], validators, options) do |value, attributes|
+        [value.strftime(format_for(:date)), attributes]
       end
     end
 

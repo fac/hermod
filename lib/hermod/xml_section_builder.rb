@@ -72,7 +72,7 @@ module Hermod
 
         value, attributes = instance_exec(value, attributes, &block)
         if value.present?
-          nodes[name] << XmlNode.new(xml_name, value.to_s, attributes).rename_attributes(options[:attributes])
+          nodes[name] << XmlNode.new(xml_name, value, attributes).rename_attributes(options[:attributes])
         end
       end
     end
@@ -113,7 +113,7 @@ module Hermod
         end
       end
       create_method(name, [], validators, options) do |value, attributes|
-        [value, attributes]
+        [value.to_s, attributes]
       end
     end
 
@@ -191,19 +191,14 @@ module Hermod
 
     # Public: defines an XML parent node that wraps other nodes
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def parent_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
-
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        nodes[symbolic_name] << XmlNode.new(xml_name, value, attributes).rename_attributes(options[:attributes]) if value.present?
+    def parent_node(name, options={})
+      create_method(name, [], [], options) do |value, attributes|
+        [value, attributes]
       end
     end
   end

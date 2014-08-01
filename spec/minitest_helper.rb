@@ -1,8 +1,12 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'hermod'
 
-require 'minitest/autorun'
-require 'pry-rescue/minitest'
+require "minitest/autorun"
+require "minitest/hell"
+require "minitest/reporters"
+require "nokogiri"
+
+Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new
 
 require 'nokogiri'
 

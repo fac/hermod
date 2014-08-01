@@ -8,9 +8,12 @@ require 'hermod/input_mutator'
 require 'hermod/validators/allowed_values'
 require 'hermod/validators/attributes'
 require 'hermod/validators/is_a'
+require 'hermod/validators/non_negative'
+require 'hermod/validators/non_zero'
 require 'hermod/validators/range'
 require 'hermod/validators/regular_expression'
 require 'hermod/validators/value_presence'
+require 'hermod/validators/whole_units'
 
 module Hermod
 
@@ -162,30 +165,27 @@ module Hermod
 
     # Public: defines a node for sending a monetary value to HMRC
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def monetary_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
+    def monetary_node(name, options={})
+      # mutators = [].tap do |mutators|
+      #   mutators << InputMutator.new(proc { |value, attributes| [value || 0, attributes] })
+      # end
+      validators = [].tap do |validators|
+        validators << Validators::NonNegative.new unless options.fetch(:negative, true)
+        validators << Validators::WholeUnits.new if options[:whole_units]
+        validators << Validators::NonZero.new unless options[:optional]
+      end
 
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        value ||= 0 # nils are zero
-      if !options.fetch(:negative, true) && value < ZERO
-        raise InvalidInputError, "#{symbolic_name} cannot be negative"
-      end
-      # Don't allow fractional values for whole number nodes
-      if options[:whole_units] && value != value.to_i
-        raise InvalidInputError, "#{symbolic_name} must be in whole pounds"
-      end
-      # Don't include optional nodes if they're zero
-      if !(options[:optional] && value.zero?)
-        nodes[symbolic_name] << XmlNode.new(xml_name, sprintf(format_for(:money), value), attributes).rename_attributes(options[:attributes]) if value.present?
-      end
+      create_method(name, [], validators, options) do |value, attributes|
+        if options[:optional] && value == 0
+          [nil, attributes]
+        else
+          [sprintf(format_for(:money), value), attributes]
+        end
       end
     end
 

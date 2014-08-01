@@ -7,6 +7,7 @@ require 'hermod/xml_node'
 require 'hermod/input_mutator'
 require 'hermod/validators/allowed_values'
 require 'hermod/validators/attributes'
+require 'hermod/validators/range'
 require 'hermod/validators/regular_expression'
 require 'hermod/validators/value_presence'
 
@@ -72,9 +73,9 @@ module Hermod
 
     # Public: defines a node for sending a string to HMRC
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
     def string_node(name, options={})
@@ -94,23 +95,19 @@ module Hermod
 
     # Public: defines a node for sending an integer to HMRC
     #
-    # symbolic_name - the name of the node. This will become the name of the
-    #                 method on the XmlSection.
-    # options       - a hash of options used to set up validations.
+    # name    - the name of the node. This will become the name of the method
+    #           on the XmlSection.
+    # options - a hash of options used to set up validations.
     #
     # Returns nothing you should rely on
-    def integer_node(symbolic_name, options={})
-      raise DuplicateNodeError, "#{symbolic_name} is already defined" if @node_order.include? symbolic_name
-      @node_order << symbolic_name
-
-      xml_name = options.fetch(:xml_name, symbolic_name.to_s.camelize)
-
-      @new_class.send :define_method, symbolic_name do |value, attributes={}|
-        if options.has_key?(:range) && (options[:range][:min] > value || options[:range][:max] < value)
-          raise InvalidInputError,
-            "#{value} is outwith the allowable range for #{symbolic_name}: #{options[:range][:min]} - #{options[:range][:max]}"
+    def integer_node(name, options={})
+      validators = [].tap do |validators|
+        if options.has_key? :range
+          validators << Validators::Range.new(options[:range][:min], options[:range][:max])
+        end
       end
-      nodes[symbolic_name] << XmlNode.new(xml_name, value.to_s, attributes).rename_attributes(options[:attributes]) if value.present?
+      create_method(name, [], validators, options) do |value, attributes|
+        [value, attributes]
       end
     end
 

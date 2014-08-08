@@ -7,7 +7,7 @@ require 'hermod/xml_node'
 require 'hermod/input_mutator'
 require 'hermod/validators/allowed_values'
 require 'hermod/validators/attributes'
-require 'hermod/validators/is_a'
+require 'hermod/validators/type_checker'
 require 'hermod/validators/non_negative'
 require 'hermod/validators/non_zero'
 require 'hermod/validators/range'
@@ -104,7 +104,7 @@ module Hermod
     def date_node(name, options={})
       validators = [].tap do |validators|
         validators << Validators::ValuePresence.new unless options.delete(:optional)
-        validators << Validators::IsA.new(Date) { |value| value.respond_to? :strftime }
+        validators << Validators::TypeChecker.new(Date) { |value| value.respond_to? :strftime }
       end
 
       create_method(name, [], validators, options) do |value, attributes|

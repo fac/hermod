@@ -41,9 +41,9 @@ module Hermod
         value_of_node("Pension").must_equal "-100.00"
       end
 
-      it "should not allow pennies for whole unit nodes" do
+      it "should not allow decimal values for whole unit nodes" do
         ex = proc { subject.pension BigDecimal.new("12.34") }.must_raise InvalidInputError
-        ex.message.must_equal "pension must be in whole pounds"
+        ex.message.must_equal "pension must be in whole units"
       end
     end
   end

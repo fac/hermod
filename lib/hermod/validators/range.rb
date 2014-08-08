@@ -2,19 +2,26 @@ require 'hermod/validators/base'
 
 module Hermod
   module Validators
+    # Checks a value is in the given range
     class Range < Base
-      attr_reader :min, :max
+      attr_reader :range
 
-      def initialize(min, max)
-        @min, @max = min, max
+      def initialize(range_or_min, max = nil)
+        if max
+          @range = range_or_min..max
+        else
+          @range = range
+        end
       end
 
+      private
+
       def test
-        min <= value && max >= value
+        range.cover?(value)
       end
 
       def message
-        "must be between #{min} and #{max}"
+        "must be between #{range.min} and #{range.max}"
       end
     end
   end

@@ -2,7 +2,10 @@ require 'hermod/validators/base'
 
 module Hermod
   module Validators
+    # checks the value is present
     class ValuePresence < Base
+
+      private
 
       def test
         value.present?

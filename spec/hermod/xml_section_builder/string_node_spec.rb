@@ -32,7 +32,7 @@ module Hermod
 
       it "should raise an error when the regex validation fails" do
         ex = proc { subject.title "Laird" }.must_raise InvalidInputError
-        ex.message.must_equal "title must match \\ASir|Dame\\z and Laird doesn't"
+        ex.message.must_equal "title must match /\\ASir|Dame\\z/ and Laird doesn't"
       end
 
       it "should require all non-optional nodes to have content" do

@@ -10,7 +10,7 @@ module Hermod
         if max
           @range = range_or_min..max
         else
-          @range = range
+          @range = range_or_min
         end
       end
 

@@ -8,16 +8,17 @@ module Hermod
 
       # Public: Sets up the list of allowed attributes
       def initialize(allowed_attributes)
-        @bad_attributes = []
         @allowed_attributes = allowed_attributes
       end
 
       private
 
       def test
-        attributes.all? do |attribute, _|
-          allowed_attributes.include? attribute
+        @bad_attributes = [] # reset this for each time the validator is used
+        attributes.each do |attribute, _|
+          bad_attributes << attribute unless allowed_attributes.include? attribute
         end
+        bad_attributes == []
       end
 
       def message

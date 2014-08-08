@@ -14,7 +14,7 @@ module Hermod
       private
 
       def test
-        value =~ pattern
+        !!(value =~ pattern)
       end
 
       def message

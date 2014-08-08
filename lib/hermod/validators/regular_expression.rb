@@ -14,11 +14,11 @@ module Hermod
       private
 
       def test
-        !!(value =~ pattern)
+        value =~ pattern
       end
 
       def message
-        "must match #{pattern.inspect} and #{value} doesn't"
+        "#{value.inspect} does not match #{pattern.inspect}"
       end
     end
   end

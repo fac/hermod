@@ -7,12 +7,17 @@ module Hermod
         Base.new
       end
 
-      it "fails validation by default" do
-        proc { subject.valid?(nil, {}) }.must_raise InvalidInputError
+      it "doesn't implement a test" do
+        proc { subject.valid?(nil, {}) }.must_raise NotImplementedError
       end
 
       it "has a default error message" do
-        ex = proc { subject.valid?(nil, {}) }.must_raise InvalidInputError
+        class TestValidator < Base
+          def test
+            false
+          end
+        end
+        ex = proc { TestValidator.new.valid?(nil, {}) }.must_raise InvalidInputError
         ex.message.must_equal "is invalid"
       end
     end

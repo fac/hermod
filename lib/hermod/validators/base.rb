@@ -12,7 +12,7 @@ module Hermod
       # Returns true if it succeeds
       def valid?(value, attributes)
         @value, @attributes = value, attributes
-        test || raise(InvalidInputError, message)
+        !!test || raise(InvalidInputError, message)
       end
 
       private
@@ -22,7 +22,7 @@ module Hermod
       #
       # Returns a boolean
       def test
-        false
+        raise NotImplementedError
       end
 
       # Private: override in subclasses to provide a more useful error message

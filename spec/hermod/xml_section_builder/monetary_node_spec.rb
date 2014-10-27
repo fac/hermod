@@ -8,6 +8,7 @@ module Hermod
       builder.monetary_node :tax, optional: true
       builder.monetary_node :ni, xml_name: "NI", negative: false
       builder.monetary_node :pension, whole_units: true
+      builder.monetary_node :student_loan, zero: false, negative: false
     end
 
     describe "Monetary nodes" do
@@ -44,6 +45,11 @@ module Hermod
       it "should not allow decimal values for whole unit nodes" do
         ex = proc { subject.pension BigDecimal.new("12.34") }.must_raise InvalidInputError
         ex.message.must_equal "pension must be in whole units"
+      end
+
+      it "should not allow zero for nodes that disallow it" do
+        ex = proc { subject.student_loan 0 }.must_raise Hermod::InvalidInputError
+        ex.message.must_equal "student_loan cannot be zero"
       end
     end
   end

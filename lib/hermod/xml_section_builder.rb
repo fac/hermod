@@ -147,8 +147,8 @@ module Hermod
     def monetary_node(name, options={})
       validators = [].tap do |validators|
         validators << Validators::NonNegative.new unless options.fetch(:negative, true)
+        validators << Validators::NonZero.new unless options.fetch(:zero, true)
         validators << Validators::WholeUnits.new if options[:whole_units]
-        validators << Validators::NonZero.new unless options[:optional]
       end
 
       create_method(name, [], validators, options) do |value, attributes|

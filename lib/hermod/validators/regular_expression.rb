@@ -13,8 +13,12 @@ module Hermod
 
       private
 
+      # Public: Checks the value matches the pattern. Blank values are ignored
+      # because those are checked by the ValuePresence validator if necessary.
+      #
+      # Returns a boolean
       def test
-        value =~ pattern
+        value.blank? || value =~ pattern
       end
 
       def message

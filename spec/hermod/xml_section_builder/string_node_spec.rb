@@ -52,7 +52,7 @@ module Hermod
 
       it "should raise an error if the value is not in the list of allowed values" do
         ex = proc { subject.mood "Jubilant" }.must_raise InvalidInputError
-        ex.message.must_equal "mood must be one of Happy, Sad, or Hangry, not Jubilant"
+        ex.message.must_equal %{mood must be one of Happy, Sad, or Hangry, not "Jubilant"}
       end
 
       it "should use the given keys for attributes" do

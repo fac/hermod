@@ -14,12 +14,12 @@ module Hermod
       private
 
       def test
-        allowed_values.include? value
+        value.blank? || allowed_values.include?(value)
       end
 
       def message
         list_of_values = allowed_values.to_sentence(last_word_connector: ", or ", two_words_connector: " or ")
-        "must be one of #{list_of_values}, not #{value}"
+        "must be one of #{list_of_values}, not #{value.inspect}"
       end
     end
   end

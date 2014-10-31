@@ -18,7 +18,7 @@ module Hermod
 
       it "raises an error for values not in the list" do
         ex = proc { subject.valid?("Albatross", {}) }.must_raise InvalidInputError
-        ex.message.must_equal %{must be one of Antelope, Bear, Cat, Dog, or Elephant, not "Albatross"}
+        ex.message.must_equal "must be one of Antelope, Bear, Cat, Dog, or Elephant, not Albatross"
       end
     end
   end

@@ -10,7 +10,7 @@ module Hermod
       end
 
       it "allows you to give a block to be more discerning" do
-        checker = TypeChecker.new(Integer) {|val| val > 0 }
+        checker = TypeChecker.new(Integer) { |val| val > 0 }
         checker.valid?(5, {}).must_equal true
         proc { checker.valid?(-2, {}) }.must_raise InvalidInputError
       end

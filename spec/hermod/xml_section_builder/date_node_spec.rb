@@ -5,7 +5,7 @@ module Hermod
 
     DateXml = XmlSection.build(formats: {date: "%Y-%m-%d"}) do |builder|
       builder.date_node :date_of_birth
-      builder.date_node :anniversary
+      builder.date_node :anniversary, optional: true
     end
 
     describe "Date nodes" do
@@ -21,6 +21,11 @@ module Hermod
 
       it "should raise an error if given something that isn't a date" do
         proc { subject.anniversary "yesterday" }.must_raise InvalidInputError
+      end
+
+      it "should ignore blank dates if the date is optional" do
+        subject.anniversary nil
+        nodes("Anniversary").must_be_empty
       end
     end
   end

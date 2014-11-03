@@ -108,7 +108,7 @@ module Hermod
       end
 
       create_method(name, [], validators, options) do |value, attributes|
-        [value.strftime(format_for(:date)), attributes]
+        [(value ? value.strftime(format_for(:date)) : nil), attributes]
       end
     end
 

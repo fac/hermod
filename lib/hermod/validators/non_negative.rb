@@ -8,7 +8,7 @@ module Hermod
       private
 
       def test
-        value >= 0
+        value.blank? || value >= 0
       end
 
       def message

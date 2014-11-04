@@ -9,7 +9,7 @@ module Hermod
       private
 
       def test
-        value == value.to_i
+        value.blank? || value == value.to_i
       end
 
       def message

@@ -152,7 +152,7 @@ module Hermod
       end
 
       create_method(name, [], validators, options) do |value, attributes|
-        if options[:optional] && value == 0
+        if (options[:optional] && value == 0) || value.blank?
           [nil, attributes]
         else
           [sprintf(format_for(:money), value), attributes]

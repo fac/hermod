@@ -51,6 +51,11 @@ module Hermod
         ex = proc { subject.student_loan 0 }.must_raise Hermod::InvalidInputError
         ex.message.must_equal "student_loan cannot be zero"
       end
+
+      it "should ignore blank nodes" do
+        subject.ni nil
+        nodes("NI").must_be_empty
+      end
     end
   end
 end

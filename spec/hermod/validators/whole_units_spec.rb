@@ -11,6 +11,10 @@ module Hermod
         subject.valid?(1.0, {}).must_equal true
       end
 
+      it "allows blank values" do
+        subject.valid?(nil, {}).must_equal true
+      end
+
       it "raises an error for values with a fractional componant" do
         ex = proc { subject.valid?(3.1415, {}) }.must_raise InvalidInputError
         ex.message.must_equal "must be in whole units"

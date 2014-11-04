@@ -12,6 +12,10 @@ module Hermod
         subject.valid?(7, {}).must_equal true
       end
 
+      it "allows blank values" do
+        subject.valid?(nil, {}).must_equal true
+      end
+
       it "raises an error for values outwith the range" do
         ex = proc { subject.valid?(0, {}) }.must_raise InvalidInputError
         ex.message.must_equal "must be between 1 and 7"

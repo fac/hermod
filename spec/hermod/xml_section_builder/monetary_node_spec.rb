@@ -52,9 +52,12 @@ module Hermod
         ex.message.must_equal "student_loan cannot be zero"
       end
 
-      it "should ignore blank nodes" do
+      it "should treat blank nodes as zero nodes" do
         subject.ni nil
-        nodes("NI").must_be_empty
+        value_of_node("NI").must_equal "0.00"
+
+        subject.tax nil
+        nodes("Tax").must_be_empty
       end
     end
   end

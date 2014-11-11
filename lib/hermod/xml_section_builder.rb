@@ -152,7 +152,7 @@ module Hermod
       end
 
       create_method(name, [], validators, options) do |value, attributes|
-        value = value.to_i
+        value ||= value.to_i
         if options[:optional] && value == 0
           [nil, attributes]
         else

@@ -14,13 +14,13 @@ module Hermod
     describe "Monetary nodes" do
       subject do
         MonetaryXml.new do |dummy|
-          dummy.pay 1000
+          dummy.pay 123.45
           dummy.tax 0
         end
       end
 
       it "should format values with the provided format string" do
-        value_of_node("Pay").must_equal "1000.00"
+        value_of_node("Pay").must_equal "123.45"
       end
 
       it "should not include optional nodes if they're zero" do

@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.3"
   spec.add_development_dependency "minitest", "~> 5.3"
   spec.add_development_dependency "minitest-reporters", "~> 1.0"
+  spec.add_development_dependency "activesupport", "> 4.2", "< 5"
   spec.add_development_dependency "guard", "~> 2.6.1"
   spec.add_development_dependency "guard-minitest", "~> 2.3.1"
   spec.add_development_dependency "nokogiri", "~> 1.5"

@@ -1,7 +1,6 @@
 language: ruby
 bundler_args: --without debugging local_testing
 rvm:
-  - 1.9.3
   - 2.1.6
   - 2.2.2
   - ruby-head

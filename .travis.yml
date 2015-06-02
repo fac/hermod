@@ -5,3 +5,7 @@ rvm:
   - 2.1.6
   - 2.2.2
   - ruby-head
+gemfile:
+  - gemfiles/activesupport-3.2
+  - gemfiles/activesupport-4.0
+  - gemfiles/activesupport-4.2

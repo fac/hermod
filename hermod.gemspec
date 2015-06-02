@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 1.9.3"
+  spec.required_ruby_version = ">= 2.0.0"
 
   spec.add_runtime_dependency "libxml-ruby", "~> 2.7", ">= 2.7.0"
   spec.add_runtime_dependency "activesupport", "> 3.2", "< 5"
@@ -29,7 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.3"
   spec.add_development_dependency "minitest", "~> 5.3"
   spec.add_development_dependency "minitest-reporters", "~> 1.0", ">= 1.0.16"
-  spec.add_development_dependency "guard", "~> 2.6", ">= 2.6.1"
-  spec.add_development_dependency "guard-minitest", "~> 2.3", ">= 2.3.1"
   spec.add_development_dependency "nokogiri", "~> 1.5"
 end

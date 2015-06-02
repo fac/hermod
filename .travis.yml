@@ -5,4 +5,4 @@ rvm:
   - 2.2.2
   - ruby-head
 
-bundler_args: --without debugging
+bundler_args: --without debugging --without local_testing

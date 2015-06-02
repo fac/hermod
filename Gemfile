@@ -9,3 +9,8 @@ group :debugging do
   gem "pry-doc", "~> 0.6.0"
   gem "bond", "~> 0.5.1"
 end
+
+group :local_testing do
+  gem "guard", "~> 2.6.1"
+  gem "guard-minitest", "~> 2.3.1"
+end

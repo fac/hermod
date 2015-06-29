@@ -6,8 +6,8 @@ module Hermod
       @mutator_proc = mutator_proc
     end
 
-    def mutate!(values, attributes)
-      mutator_proc.call(values, attributes)
+    def mutate!(values, attributes, instance)
+      mutator_proc.call(values, attributes, instance)
     end
   end
 end

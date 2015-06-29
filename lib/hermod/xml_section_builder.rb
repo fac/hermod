@@ -192,7 +192,7 @@ module Hermod
       xml_name = options.fetch(:xml_name, name.to_s.camelize)
 
       @new_class.send :define_method, name do |value, attributes = {}|
-        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes) }
+        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes, self) }
         begin
           validators.each { |validator| validator.valid?(value, attributes) }
         rescue InvalidInputError => ex

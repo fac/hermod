@@ -79,7 +79,8 @@ module Hermod
     def self.formats
       @formats ||= {
         date: "%Y-%m-%d",
-        money: "%.2f"
+        datetime: "%Y-%m-%d %H:%M:%S",
+        money: "%.2f",
       }
     end
 

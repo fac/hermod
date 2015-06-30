@@ -8,10 +8,10 @@ module Hermod
       builder.string_node :name, optional: true
       builder.string_node :title, matches: /\ASir|Dame\z/, attributes: {masculine: "Male"}
       builder.string_node :required
-      builder.string_node :gender, input_mutator: (proc do |value, attributes|
+      builder.string_node :gender, input_mutator: (lambda do |value, attributes|
         [value == "Male" ? "M" : "F", attributes]
       end)
-      builder.string_node :status, input_mutator: (proc do |value, attributes, instance|
+      builder.string_node :status, input_mutator: (lambda do |value, attributes, instance|
         adjective = case instance.nodes[:mood].first.value
         when "Happy"
           "joyously"

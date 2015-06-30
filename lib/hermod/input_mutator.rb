@@ -7,7 +7,11 @@ module Hermod
     end
 
     def mutate!(values, attributes, instance)
-      mutator_proc.call(values, attributes, instance)
+      if mutator_proc.arity == 2
+        mutator_proc.call(values, attributes)
+      else
+        mutator_proc.call(values, attributes, instance)
+      end
     end
   end
 end

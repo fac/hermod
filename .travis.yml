@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without debugging local_testing
+bundler_args: --without test
 rvm:
   - 2.1.6
   - 2.2.2

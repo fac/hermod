@@ -18,7 +18,7 @@ module Hermod
     # attributes - the attributes of the XML node as a Hash
     #
     # Returns the new value and attributes as an Array.
-    def mutate!(value, attributes)
+    def mutate!(value, attributes, instance)
       [value.gsub(/[\n\r]/, replacement), attributes]
     end
   end

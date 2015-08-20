@@ -14,7 +14,7 @@ module Hermod
       private
 
       def test
-        allowed_values.include? value
+        value.blank? || allowed_values.include?(value)
       end
 
       def message

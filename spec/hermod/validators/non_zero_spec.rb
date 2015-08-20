@@ -15,6 +15,10 @@ module Hermod
         subject.valid?(-1, {}).must_equal true
       end
 
+      it "allows blank values" do
+        subject.valid?(nil, {}).must_equal true
+      end
+
       it "raises an error for zero values" do
         ex = proc { subject.valid?(0, {}) }.must_raise InvalidInputError
         ex.message.must_equal "cannot be zero"

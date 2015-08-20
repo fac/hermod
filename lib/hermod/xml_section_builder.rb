@@ -131,7 +131,7 @@ module Hermod
       end
 
       create_method(name, [], validators, options) do |value, attributes|
-        [value.strftime(format_for(:date)), attributes]
+        [(value ? value.strftime(format_for(:date)) : nil), attributes]
       end
     end
 
@@ -170,11 +170,12 @@ module Hermod
     def monetary_node(name, options={})
       validators = [].tap do |validators|
         validators << Validators::NonNegative.new unless options.fetch(:negative, true)
+        validators << Validators::NonZero.new unless options.fetch(:zero, true)
         validators << Validators::WholeUnits.new if options[:whole_units]
-        validators << Validators::NonZero.new unless options[:optional]
       end
 
       create_method(name, [], validators, options) do |value, attributes|
+        value ||= value.to_i
         if options[:optional] && value == 0
           [nil, attributes]
         else
@@ -214,7 +215,7 @@ module Hermod
       xml_name = options.fetch(:xml_name, name.to_s.camelize)
 
       @new_class.send :define_method, name do |value, attributes = {}|
-        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes) }
+        mutators.each { |mutator| value, attributes = mutator.mutate!(value, attributes, self) }
         begin
           validators.each { |validator| validator.valid?(value, attributes) }
         rescue InvalidInputError => ex

@@ -10,11 +10,14 @@ module Hermod
       end
 
       it "allows you to give a block to be more discerning" do
-        checker = TypeChecker.new(Date) {|val| val.respond_to? :strftime }
-        dateish = Minitest::Mock.new
-        dateish.expect :strftime, "today"
-        checker.valid?(dateish, {}).must_equal true
-        proc { checker.valid?(Minitest::Mock.new, {}) }.must_raise InvalidInputError
+        checker = TypeChecker.new(Integer) { |val| val > 0 }
+        checker.valid?(5, {}).must_equal true
+        proc { checker.valid?(-2, {}) }.must_raise InvalidInputError
+      end
+
+      it "ignores blank values" do
+        checker = TypeChecker.new(Integer)
+        checker.valid?(nil, {}).must_equal true
       end
 
       it "gives the correct message" do

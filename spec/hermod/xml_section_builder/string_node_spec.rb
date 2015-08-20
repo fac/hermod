@@ -11,6 +11,17 @@ module Hermod
       builder.string_node :gender, input_mutator: (lambda do |value, attributes|
         [value == "Male" ? "M" : "F", attributes]
       end)
+      builder.string_node :status, input_mutator: (lambda do |value, attributes, instance|
+        adjective = case instance.nodes[:mood].first.value
+        when "Happy"
+          "joyously"
+        when "Sad"
+          "dejectedly"
+        when "Hangry"
+          "furiously"
+        end
+        ["#{value} #{adjective}", attributes]
+      end)
       builder.string_node :mood, allowed_values: %w(Happy Sad Hangry)
     end
 
@@ -43,6 +54,12 @@ module Hermod
       it "should apply changes to the inputs if a input_mutator is provided" do
         subject.gender "Male"
         value_of_node("Gender").must_equal "M"
+      end
+
+      it "should allow input_mutators to access nodes the instance" do
+        subject.mood "Hangry"
+        subject.status "Eating cookies"
+        value_of_node("Status").must_equal "Eating cookies furiously"
       end
 
       it "should restrict values to those in the list of allowed values if such a list is provided" do

@@ -17,7 +17,7 @@ module Hermod
       private
 
       def test
-        range.cover?(value)
+        value.blank? || range.cover?(value)
       end
 
       def message

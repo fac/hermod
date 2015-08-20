@@ -24,7 +24,7 @@ module Hermod
       private
 
       def test
-        checker.call(value)
+        value.blank? || checker.call(value)
       end
 
       def message

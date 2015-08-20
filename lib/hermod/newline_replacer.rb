@@ -1,5 +1,3 @@
-require 'pry'
-
 module Hermod
   class NewlineReplacer
     attr_reader :replacement

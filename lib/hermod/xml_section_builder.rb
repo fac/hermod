@@ -112,6 +112,23 @@ module Hermod
       end
     end
 
+    # Public: defines a node for sending a datetime to HMRC
+    #
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
+    # options - a hash of options used to set up validations.
+    #
+    # Returns nothing you should rely on
+    def datetime_node(name, options={})
+      validators = [].tap do |validators|
+        validators << Validators::ValuePresence.new unless options.delete(:optional)
+        validators << Validators::TypeChecker.new(DateTime) { |value| value.respond_to? :strftime }
+      end
+
+      create_method(name, [], validators, options) do |value, attributes|
+        [(value ? value.strftime(format_for(:datetime)) : nil), attributes]
+      end
+    end
+
     # Public: defines a node for sending a boolean to HMRC. It will only be
     # sent if the boolean is true.
     #

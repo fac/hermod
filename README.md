@@ -266,6 +266,35 @@ end
 </Example>
 ```
 
+#### DateTime Nodes
+
+Datetime nodes let you send through a date and a time to HMRC. It will be
+converted to the given datetime format which you can specify as a format
+string in the `formats` option passed to the `Hermod::XmlSection.build`
+call. Anything that responds to `strftime` can be passed to the node.
+Anything else will cause an `Hermod::InvalidInputError` exception to be raised.
+
+*Building an XmlSection*
+```ruby
+Example = Hermod::XmlSection.build(formats: {datetime: "%Y-%m-%d %H:%M:%S"}) do |builder|
+  builder.datetime_node :published
+end
+```
+
+*Using that XmlSection*
+```ruby
+Example.new do |example|
+  example.published DateTime.new(2014, 9, 3, 10, 42, 50)
+end
+```
+
+*The Resulting XML*
+```xml
+<Example>
+  <Published>2014-09-03 10:42:50</Published>
+</Example>
+```
+
 #### Yes Nodes
 
 Yes nodes allow you to send a boolean value to HMRC provided that value is

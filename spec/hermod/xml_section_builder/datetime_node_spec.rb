@@ -3,7 +3,7 @@ require "minitest_helper"
 module Hermod
   describe XmlSection do
 
-    DateTimeXml = XmlSection.build(formats: {datetime: "%Y-%m-%d %H:%M:%S"}) do |builder|
+    DateTimeXml = XmlSection.build do |builder|
       builder.datetime_node :published
       builder.datetime_node :redacted, optional: true
     end

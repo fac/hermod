@@ -68,7 +68,7 @@ module Hermod
     #
     # Returns a String
     def self.xml_name
-      @xml_name || name.demodulize
+      @xml_name ||= name.demodulize
     end
 
     # Internal: provides access to the formats hash, falling back on an empty

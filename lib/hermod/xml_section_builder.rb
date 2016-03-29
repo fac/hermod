@@ -5,6 +5,7 @@ require 'active_support/core_ext/object/blank'
 
 require 'hermod/xml_node'
 require 'hermod/input_mutator'
+require 'hermod/newline_replacer'
 require 'hermod/validators/allowed_values'
 require 'hermod/validators/attributes'
 require 'hermod/validators/type_checker'
@@ -65,6 +66,28 @@ module Hermod
     # Returns nothing you should rely on
     def string_node(name, options={})
       mutators = [].tap do |mutators|
+        mutators << InputMutator.new(options.delete(:input_mutator)) if options.has_key? :input_mutator
+      end
+      validators = [].tap do |validators|
+        validators << Validators::AllowedValues.new(options.delete(:allowed_values)) if options.has_key? :allowed_values
+        validators << Validators::RegularExpression.new(options.delete(:matches)) if options.has_key? :matches
+        validators << Validators::ValuePresence.new unless options.delete(:optional)
+        validators << Validators::Attributes.new(options.fetch(:attributes, {}).keys)
+      end
+      create_method(name, mutators, validators, options) do |value, attributes|
+        [value, attributes]
+      end
+    end
+
+    # Public: defines a node for sending a block of text to HMRC
+    #
+    # name    - the name of the node. This will become the name of the method on the XmlSection.
+    # options - a hash of options used to set up validations.
+    #
+    # Returns nothing you should rely on
+    def text_node(name, options={})
+      mutators = [].tap do |mutators|
+        mutators << NewlineReplacer.new(options.delete(:replace_newlines)) if options.has_key? :replace_newlines
         mutators << InputMutator.new(options.delete(:input_mutator)) if options.has_key? :input_mutator
       end
       validators = [].tap do |validators|

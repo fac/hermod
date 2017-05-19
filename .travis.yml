@@ -1,7 +1,6 @@
 language: ruby
 bundler_args: --without test
 rvm:
-  - 2.1.8
   - 2.2.4
   - 2.3.0
 gemfile:

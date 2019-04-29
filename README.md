@@ -527,3 +527,16 @@ in the order the calls were made in.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## Build and release a new version
+
+Once you're happy that there are enough new features to require a new release, you will need the following steps.
+
+1. Update the `version.rb` file to a new version. This should be addressed with [semantic versioning](https://semver.org/spec/v2.0.0.html).
+2. Update the CHANGELOG.md file to use the new version number where it said `Unreleased` previously. Add a new, empty `Unreleased` section.
+3. Merge the change to `version.rb` to `master`; this will automatically trigger a release of the gem to the internal gem server. For more on this, see: [internal gems](https://www.notion.so/freeagent/Internal-gems-5c8098501fcc48e4921be31aa9b4d495#e2944d2de5ce4fd4a6c244a4697cc1fd).
+4. To point your application to the newly released gem, use the following. This will modify your Gemfile.lock to reflect the latest version number
+
+    ```ruby
+    gem update sales_tax_calculator
+    ```

@@ -376,7 +376,7 @@ end
 *Using that XmlSection*
 ```ruby
 Example.new do |example|
-  example.taxable_pay BigDecimal.new("-300")
+  example.taxable_pay BigDecimal("-300")
 end
 ```
 
@@ -398,7 +398,7 @@ end
 *Using that XmlSection*
 ```ruby
 Example.new do |example|
-  example.lower_earnings_limit BigDecimal.new("153.49")
+  example.lower_earnings_limit BigDecimal("153.49")
 end
 ```
 
@@ -420,8 +420,8 @@ end
 *Using that XmlSection*
 ```ruby
 Example.new do |example|
-  example.taxable_pay BigDecimal.new("1000")
-  example.tax BigDecimal.new("0")
+  example.taxable_pay BigDecimal("1000")
+  example.tax BigDecimal("0")
 end
 ```
 

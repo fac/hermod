@@ -39,7 +39,7 @@ module Hermod
       subject do
         FormattedXML.new do |formatted|
           formatted.birthday Date.new(1988, 8, 13)
-          formatted.allowance BigDecimal.new("20")
+          formatted.allowance BigDecimal("20")
         end
       end
 

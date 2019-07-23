@@ -1,10 +1,10 @@
 #!groovy
 
-@Library('freeagent@rubygem_publish') _
+@Library('freeagent') _
 
 freeagentGem(
-    node: 'webkit',
-    slack: [channel: '#tax-eng-alerts'],
+    node: 'smartos',
+    slack: [channel: '#tax-eng-ci'],
     remote:        "https://rubygems.org/api/v1/gems",
     key:           "rubygems_api_key",
     pushTag:       true,

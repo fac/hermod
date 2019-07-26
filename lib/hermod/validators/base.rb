@@ -3,16 +3,13 @@ require 'active_support/core_ext/array/conversions'
 module Hermod
   module Validators
     class Base
-      attr_reader :value, :attributes
-
       # Public: Runs the test for the validator returning true if it passes and
       # raising if it fails
       #
       # Raises a Hermod::InvalidInputError if the test fails
       # Returns true if it succeeds
       def valid?(value, attributes)
-        @value, @attributes = value, attributes
-        !!test || raise(InvalidInputError, message)
+        !!test(value, attributes) || raise(InvalidInputError, message(value, attributes))
       end
 
       private
@@ -21,14 +18,14 @@ module Hermod
       # validator
       #
       # Returns a boolean
-      def test
+      def test(value, attributes)
         raise NotImplementedError
       end
 
       # Private: override in subclasses to provide a more useful error message
       #
       # Returns a string
-      def message
+      def message(value, attributes)
         "is invalid"
       end
     end

@@ -8,11 +8,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.blank? || value == value.to_i
       end
 
-      def message
+      def message(value, attributes)
         "must be in whole units"
       end
     end

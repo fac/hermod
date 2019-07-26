@@ -13,11 +13,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.blank? || allowed_values.include?(value)
       end
 
-      def message
+      def message(value, attributes)
         list_of_values = allowed_values.to_sentence(last_word_connector: ", or ", two_words_connector: " or ")
         "must be one of #{list_of_values}, not #{value}"
       end

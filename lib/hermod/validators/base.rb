@@ -11,8 +11,11 @@ module Hermod
       # Raises a Hermod::InvalidInputError if the test fails
       # Returns true if it succeeds
       def valid?(value, attributes)
-        @value, @attributes = value, attributes
-        !!test || raise(InvalidInputError, message)
+        @mutex ||= Mutex.new
+        @mutex.synchronize do
+          @value, @attributes = value, attributes
+          !!test || raise(InvalidInputError, message)
+        end
       end
 
       private

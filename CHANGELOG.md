@@ -7,13 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.1] - 2019-08-26
+### Added
+- Support Rails 6.0
+
 ## [2.5.0] - 2019-07-25
 ### Added
-- Adds Jenkins build 
+- Adds Jenkins build
 - Upgrades bundler and ruby version file
 
 ## [2.4.1] - 2019-07-22
-### Added Resolve BigDecimal deprecation warnings
+### Added
+- Resolve BigDecimal deprecation warnings
 
 ## [2.0.0] - Unknown
 

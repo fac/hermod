@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.0.0"
 
   spec.add_runtime_dependency "libxml-ruby", "~> 2.7", ">= 2.7.0"
-  spec.add_runtime_dependency "activesupport", "> 3.2", "< 6"
+  spec.add_runtime_dependency "activesupport", "> 3.2", "< 7"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 11.1"

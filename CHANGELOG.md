@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.2] - 2019-10-21
+### Added
+- Links for homepage, changelog, issues and source code.
+
 ## [2.5.1] - 2019-08-26
 ### Added
 - Support Rails 6.0

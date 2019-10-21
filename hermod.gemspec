@@ -30,4 +30,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.3"
   spec.add_development_dependency "minitest-reporters", "~> 1.0", ">= 1.0.16"
   spec.add_development_dependency "nokogiri", "~> 1.5"
+
+  spec.metadata = {
+    "bug_tracker_uri"   => "https://github.com/fac/hermod/issues",
+    "changelog_uri"     => "https://github.com/fac/hermod/blob/master/CHANGELOG.md",
+    "source_code_uri"   => "https://github.com/fac/hermod",
+    "wiki_uri"          => "https://github.com/fac/hermod/wiki"
+  }
 end

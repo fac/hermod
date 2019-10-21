@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{A Ruby library for talking to the HMRC Government Gateway.
   This provides a builder for creating classes that can generate the XML needed complete with type information and
   runtime validation.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/fac/hermod"
   spec.license       = "Apache License, Version 2.0"
 
   spec.files         = `git ls-files -z`.split("\x0")

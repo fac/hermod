@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{A Ruby library for talking to the HMRC Government Gateway.
   This provides a builder for creating classes that can generate the XML needed complete with type information and
   runtime validation.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/fac/hermod"
   spec.license       = "Apache License, Version 2.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -30,4 +30,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.3"
   spec.add_development_dependency "minitest-reporters", "~> 1.0", ">= 1.0.16"
   spec.add_development_dependency "nokogiri", "~> 1.5"
+
+  spec.metadata = {
+    "bug_tracker_uri"   => "https://github.com/fac/hermod/issues",
+    "changelog_uri"     => "https://github.com/fac/hermod/blob/master/CHANGELOG.md",
+    "source_code_uri"   => "https://github.com/fac/hermod",
+    "wiki_uri"          => "https://github.com/fac/hermod/wiki"
+  }
 end

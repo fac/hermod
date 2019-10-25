@@ -13,7 +13,7 @@ module Hermod
 
       it "has a default error message" do
         class TestValidator < Base
-          def test
+          def test(value, attributes)
             false
           end
         end

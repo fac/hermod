@@ -13,16 +13,18 @@ module Hermod
 
       private
 
-      def test
-        @bad_attributes = [] # reset this for each time the validator is used
-        attributes.each do |attribute, _|
-          bad_attributes << attribute unless allowed_attributes.include? attribute
-        end
-        bad_attributes == []
+      def bad_attributes(attributes)
+        attributes.map do |attribute, _|
+          attribute unless allowed_attributes.include? attribute
+        end.compact
       end
 
-      def message
-        "has attributes it doesn't accept: #{bad_attributes.to_sentence}"
+      def test(value, attributes)
+        bad_attributes(attributes) == []
+      end
+
+      def message(value, attributes)
+        "has attributes it doesn't accept: #{bad_attributes(attributes).to_sentence}"
       end
     end
   end

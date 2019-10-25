@@ -43,7 +43,7 @@ module Hermod
       end
 
       it "should not allow decimal values for whole unit nodes" do
-        ex = proc { subject.pension BigDecimal.new("12.34") }.must_raise InvalidInputError
+        ex = proc { subject.pension BigDecimal("12.34") }.must_raise InvalidInputError
         ex.message.must_equal "pension must be in whole units"
       end
 

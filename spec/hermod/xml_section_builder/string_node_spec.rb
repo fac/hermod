@@ -72,6 +72,19 @@ module Hermod
         ex.message.must_equal "mood must be one of Happy, Sad, or Hangry, not Jubilant"
       end
 
+      it "should be thread safe for validation" do
+        subject1 = StringXml.new do |string_xml|
+          string_xml.greeting "Hello"
+        end
+
+        Thread.new do
+          subject1.mood "Hangry"
+        end
+
+        ex = proc { subject.mood "Jubilant" }.must_raise InvalidInputError
+        ex.message.must_equal "mood must be one of Happy, Sad, or Hangry, not Jubilant"
+      end
+
       it "should use the given keys for attributes" do
         subject.title "Sir", masculine: "no"
         attributes_for_node("Title").keys.first.must_equal "Male"

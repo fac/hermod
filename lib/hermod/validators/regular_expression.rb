@@ -17,11 +17,11 @@ module Hermod
       # because those are checked by the ValuePresence validator if necessary.
       #
       # Returns a boolean
-      def test
+      def test(value, attributes)
         value.blank? || value =~ pattern
       end
 
-      def message
+      def message(value, attributes)
         "#{value.inspect} does not match #{pattern.inspect}"
       end
     end

@@ -23,11 +23,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.blank? || checker.call(value)
       end
 
-      def message
+      def message(value, attributes)
         expected_class_name = expected_class.name.downcase
         join_word = (%w(a e i o u).include?(expected_class_name[0]) ? "an" : "a")
         "must be #{join_word} #{expected_class_name}"

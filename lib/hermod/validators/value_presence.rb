@@ -7,11 +7,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.present?
       end
 
-      def message
+      def message(value, attributes)
         "isn't optional but no value was provided"
       end
     end

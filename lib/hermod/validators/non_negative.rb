@@ -7,11 +7,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.blank? || value >= 0
       end
 
-      def message
+      def message(value, attributes)
         "cannot be negative"
       end
     end

@@ -32,7 +32,7 @@ module Hermod
   # defining nodes on that subclass of varying types used by HMRC.
   class XmlSectionBuilder
 
-    ZERO = BigDecimal.new('0').freeze
+    ZERO = BigDecimal("0").freeze
     BOOLEAN_VALUES = [
       YES = "yes".freeze,
       NO  = "no".freeze,

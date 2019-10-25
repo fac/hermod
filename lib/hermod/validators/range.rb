@@ -16,11 +16,11 @@ module Hermod
 
       private
 
-      def test
+      def test(value, attributes)
         value.blank? || range.cover?(value)
       end
 
-      def message
+      def message(value, attributes)
         "must be between #{range.min} and #{range.max}"
       end
     end

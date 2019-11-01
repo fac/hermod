@@ -35,6 +35,6 @@ Gem::Specification.new do |spec|
     "bug_tracker_uri"   => "https://github.com/fac/hermod/issues",
     "changelog_uri"     => "https://github.com/fac/hermod/blob/master/CHANGELOG.md",
     "source_code_uri"   => "https://github.com/fac/hermod",
-    "wiki_uri"          => "https://github.com/fac/hermod/wiki"
+    "wiki_uri"          => "https://github.com/fac/hermod/blob/master/README.md"
   }
 end

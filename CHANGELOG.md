@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+##[2.6.1] - 2020-10-22
+## Added
+- Changelog updates
+
+##[2.6.0] - 2020-10-22
+## Added
+- Update libxml-ruby to version ~> 3.2
+- Update ruby-version to 2.7.1
 
 ##[2.5.3] - 2019-11-01
 ### Added
@@ -32,4 +40,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - Unknown
 There were a number of "releases" that were made prior to this point. However, we have no good details of what was included in which release
-

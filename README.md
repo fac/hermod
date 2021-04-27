@@ -1,7 +1,6 @@
 # Hermod
 
-[![Gem](https://github.com/fac/git-xargs-hermod764329289/actions/workflows/freeagent-gem.yml/badge.svg)](https://github.com/fac/git-xargs-hermod764329289/actions/workflows/freeagent-gem.yml)
-
+[![Gem](https://github.com/fac/hermod/actions/workflows/freeagent-gem.yml/badge.svg)](https://github.com/fac/hermod/actions/workflows/freeagent-gem.yml)
 [![Code
 Climate](https://codeclimate.com/github/fac/hermod/badges/gpa.svg)](https://codeclimate.com/github/fac/hermod)
 [![Build Status](https://travis-ci.org/fac/hermod.svg?branch=master)](https://travis-ci.org/fac/hermod)

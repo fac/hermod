@@ -29,8 +29,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: fac/ruby-gem-setup-credentials-action@v2
+    - uses: fac/ruby-gem-setup-credentials-action@devp/add-user-input
       with:
+        user: ""
+        key: rubygems
         token: ${{ secrets.FAC_RUBYGEMS_KEY }}
 
     # Build the gem package
@@ -45,12 +47,12 @@ jobs:
       if:   github.ref == 'refs/heads/master'
       uses: fac/ruby-gem-push-action@v2
       with:
-        key: github
+        key: rubygems
 
     # PR branch builds will release pre-release gems
     - name: Pre-Release
       if:   github.ref != 'refs/heads/master'
       uses: fac/ruby-gem-push-action@v2
       with:
-        key: github
+        key: rubygems
         pre-release: true

@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/fac/hermod"
   spec.license       = "Apache License, Version 2.0"
 
-  spec.metadata["allowed_push_host"] = "http://rubygems.pkg.github.com/fac"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }

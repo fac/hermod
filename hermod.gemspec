@@ -15,8 +15,6 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/fac/hermod"
   spec.license       = "Apache License, Version 2.0"
 
-  spec.metadata["allowed_push_host"] = "https://rubygems.org"
-
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
@@ -34,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "nokogiri", "~> 1.5"
 
   spec.metadata = {
+    "allowed_push_host" => "https://rubygems.org",
     "bug_tracker_uri"   => "https://github.com/fac/hermod/issues",
     "changelog_uri"     => "https://github.com/fac/hermod/blob/master/CHANGELOG.md",
     "source_code_uri"   => "https://github.com/fac/hermod",

@@ -1,3 +1,3 @@
 module Hermod
-  VERSION = "2.6.2.pre2"
+  VERSION = "2.6.1"
 end

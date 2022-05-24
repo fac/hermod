@@ -4,7 +4,7 @@ module Hermod
   module Validators
     # Checks the attributes are in a list of allowed attributes
     class Attributes < Base
-      attr_reader :allowed_attributes, :bad_attributes
+      attr_reader :allowed_attributes
 
       # Public: Sets up the list of allowed attributes
       def initialize(allowed_attributes)

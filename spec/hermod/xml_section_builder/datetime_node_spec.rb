@@ -16,16 +16,16 @@ module Hermod
       end
 
       it "should format the datetime with the given format string" do
-        value_of_node("Published").must_equal "2015-03-14 12:30:56"
+        expect(value_of_node("Published")).must_equal "2015-03-14 12:30:56"
       end
 
       it "should raise an error if given something that isn't a date" do
-        proc { subject.redacted "yesterday" }.must_raise InvalidInputError
+        expect { subject.redacted "yesterday" }.must_raise InvalidInputError
       end
 
       it "should ignore blank dates if the date is optional" do
         subject.redacted nil
-        nodes("Redacted").must_be_empty
+        expect(nodes("Redacted")).must_be_empty
       end
     end
   end

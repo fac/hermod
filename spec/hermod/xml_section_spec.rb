@@ -21,7 +21,7 @@ module Hermod
       end
 
       it "should use the class name as the XML node name" do
-        subject.to_xml.name.must_equal "UnnamedXML"
+        expect(subject.to_xml.name).must_equal "UnnamedXML"
       end
     end
 
@@ -31,7 +31,7 @@ module Hermod
       end
 
       it "should use the class name as the XML node name" do
-        subject.to_xml.name.must_equal "Testing"
+        expect(subject.to_xml.name).must_equal "Testing"
       end
     end
 
@@ -44,11 +44,11 @@ module Hermod
       end
 
       it "formats dates in yyyy-mm-dd form" do
-        value_of_node("Birthday").must_equal("1988-08-13")
+        expect(value_of_node("Birthday")).must_equal("1988-08-13")
       end
 
       it "formats money to two decimal places" do
-        value_of_node("Allowance").must_equal("20.00")
+        expect(value_of_node("Allowance")).must_equal("20.00")
       end
     end
 
@@ -63,32 +63,32 @@ module Hermod
       end
 
       it "should order nodes by the order they were defined when the class was built" do
-        node_by_index(0).name.must_equal "First"
-        node_by_index(0).content.must_equal "alpha"
+        expect(node_by_index(0).name).must_equal "First"
+        expect(node_by_index(0).content).must_equal "alpha"
 
-        node_by_index(1).name.must_equal "Repeated"
-        node_by_index(1).content.must_equal "beta"
+        expect(node_by_index(1).name).must_equal "Repeated"
+        expect(node_by_index(1).content).must_equal "beta"
 
-        node_by_index(-1).name.must_equal "Last"
-        node_by_index(-1).content.must_equal "epsilon"
+        expect(node_by_index(-1).name).must_equal "Last"
+        expect(node_by_index(-1).content).must_equal "epsilon"
       end
 
       it "should order nodes called multiple times in the order they were called" do
-        node_by_index(1).name.must_equal "Repeated"
-        node_by_index(1).content.must_equal "beta"
+        expect(node_by_index(1).name).must_equal "Repeated"
+        expect(node_by_index(1).content).must_equal "beta"
 
-        node_by_index(2).name.must_equal "Repeated"
-        node_by_index(2).content.must_equal "gamma"
+        expect(node_by_index(2).name).must_equal "Repeated"
+        expect(node_by_index(2).content).must_equal "gamma"
       end
 
       it "should order nodes at XML generation time, not at call time" do
         subject.repeated "delta"
 
-        node_by_index(-2).name.must_equal "Repeated"
-        node_by_index(-2).content.must_equal "delta"
+        expect(node_by_index(-2).name).must_equal "Repeated"
+        expect(node_by_index(-2).content).must_equal "delta"
 
-        node_by_index(-1).name.must_equal "Last"
-        node_by_index(-1).content.must_equal "epsilon"
+        expect(node_by_index(-1).name).must_equal "Last"
+        expect(node_by_index(-1).content).must_equal "epsilon"
       end
     end
   end

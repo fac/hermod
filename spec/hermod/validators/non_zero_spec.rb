@@ -8,20 +8,20 @@ module Hermod
       end
 
       it "allows positive values" do
-        subject.valid?(1, {}).must_equal true
+        expect(subject.valid?(1, {})).must_equal true
       end
 
       it "allows negative values" do
-        subject.valid?(-1, {}).must_equal true
+        expect(subject.valid?(-1, {})).must_equal true
       end
 
       it "allows blank values" do
-        subject.valid?(nil, {}).must_equal true
+        expect(subject.valid?(nil, {})).must_equal true
       end
 
       it "raises an error for zero values" do
-        ex = proc { subject.valid?(0, {}) }.must_raise InvalidInputError
-        ex.message.must_equal "cannot be zero"
+        ex = expect { subject.valid?(0, {}) }.must_raise InvalidInputError
+        expect(ex.message).must_equal "cannot be zero"
       end
     end
   end

@@ -8,7 +8,7 @@ module Hermod
       end
 
       it "doesn't implement a test" do
-        proc { subject.valid?(nil, {}) }.must_raise NotImplementedError
+        expect { subject.valid?(nil, {}) }.must_raise NotImplementedError
       end
 
       it "has a default error message" do
@@ -17,8 +17,8 @@ module Hermod
             false
           end
         end
-        ex = proc { TestValidator.new.valid?(nil, {}) }.must_raise InvalidInputError
-        ex.message.must_equal "is invalid"
+        ex = expect { TestValidator.new.valid?(nil, {}) }.must_raise InvalidInputError
+        expect(ex.message).must_equal "is invalid"
       end
     end
   end

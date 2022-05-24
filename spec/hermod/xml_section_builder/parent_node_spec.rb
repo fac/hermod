@@ -21,7 +21,7 @@ module Hermod
 
       it "should correctly wrap the inner XML" do
         expected = "<ParentXml>\n  <InnerXml>\n    <Inside>layered like an onion</Inside>\n  </InnerXml>\n</ParentXml>"
-        subject.to_xml.to_s.must_equal expected
+        expect(subject.to_xml.to_s).must_equal expected
       end
     end
   end

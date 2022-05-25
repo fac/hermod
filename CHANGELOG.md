@@ -7,19 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-##[2.6.2] - 2022-01-10
+## [2.7.0] - 2022-05-25
+### Fixed
+- Added missing require in `Hermod::XmlSectionBuilder`
+- Fixed deprecations in Minitest
+
+### Removed
+- Remove unused bad_attributes attr_reader on `Hermod::Validators::Attributes`
+
+### Changed
+- Updated development dependencies
+
+## [2.6.2] - 2022-01-10
+### Changed
 - Remove the upper limit on the activesupport version
 
-##[2.6.1] - 2020-10-22
+## [2.6.1] - 2020-10-22
 ## Added
 - Changelog updates
 
-##[2.6.0] - 2020-10-22
+## [2.6.0] - 2020-10-22
 ## Added
 - Update libxml-ruby to version ~> 3.2
 - Update ruby-version to 2.7.1
 
-##[2.5.3] - 2019-11-01
+## [2.5.3] - 2019-11-01
 ### Added
 - Link wiki to the readme file.
 

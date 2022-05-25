@@ -16,16 +16,16 @@ module Hermod
       end
 
       it "should format the date with the given date string" do
-        value_of_node("DateOfBirth").must_equal "1988-08-13"
+        expect(value_of_node("DateOfBirth")).must_equal "1988-08-13"
       end
 
       it "should raise an error if given something that isn't a date" do
-        proc { subject.anniversary "yesterday" }.must_raise InvalidInputError
+        expect { subject.anniversary "yesterday" }.must_raise InvalidInputError
       end
 
       it "should ignore blank dates if the date is optional" do
         subject.anniversary nil
-        nodes("Anniversary").must_be_empty
+        expect(nodes("Anniversary")).must_be_empty
       end
     end
   end

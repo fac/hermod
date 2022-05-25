@@ -1,7 +1,8 @@
-require 'bigdecimal'
 require 'active_support'
 require 'active_support/core_ext/string/inflections'
 require 'active_support/core_ext/object/blank'
+require 'bigdecimal'
+require 'date'
 
 require 'hermod/xml_node'
 require 'hermod/input_mutator'

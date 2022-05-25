@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Remove unused bad_attributes attr_reader on `Hermod::Validators::Attributes`
 
+### Changed
+- Updated development dependencies
+
 ## [2.6.2] - 2022-01-10
 ### Changed
 - Remove the upper limit on the activesupport version

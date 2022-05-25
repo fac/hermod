@@ -8,12 +8,12 @@ module Hermod
       end
 
       it "permits attributes in the list" do
-        subject.valid?(nil, {species: "Felis catus", genus: "Felis"}).must_equal true
+        expect(subject.valid?(nil, {species: "Felis catus", genus: "Felis"})).must_equal true
       end
 
       it "raises an error for attributes not in the list" do
-        ex = proc { subject.valid?(nil, {phylum: "Chordata"}) }.must_raise InvalidInputError
-        ex.message.must_equal "has attributes it doesn't accept: phylum"
+        ex = expect { subject.valid?(nil, {phylum: "Chordata"}) }.must_raise InvalidInputError
+        expect(ex.message).must_equal "has attributes it doesn't accept: phylum"
       end
     end
   end

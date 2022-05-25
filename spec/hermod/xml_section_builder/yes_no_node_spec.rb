@@ -16,7 +16,7 @@ module Hermod
         end
 
         it "should include the node with yes as the contents" do
-          value_of_node("Awesome").must_equal "yes"
+          expect(value_of_node("Awesome")).must_equal "yes"
         end
       end
 
@@ -28,7 +28,7 @@ module Hermod
         end
 
         it "should include the node with no as the contents" do
-          value_of_node("Awesome").must_equal "no"
+          expect(value_of_node("Awesome")).must_equal "no"
         end
       end
     end

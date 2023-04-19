@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2023-04-19
+### Removed
+- Removed support for Ruby 2.0 - 2.4, minimum supported version is now 2.5
+- Removed Travis CI
+
+### Changed
+- Changed project Ruby version to 3.1.4
+- Updated dependencies to versions supporting a minimum of Ruby 2.5
+
 ## [2.7.0] - 2022-05-25
 ### Fixed
 - Added missing require in `Hermod::XmlSectionBuilder`

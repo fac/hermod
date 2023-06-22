@@ -1,0 +1,58 @@
+# Duplicated from: https://github.com/fac/shared-workflows/blob/main/.github/workflows/actionlint.yml
+# Using this public repo as a de facto public mirror for the shared workflow
+
+name: Lint workflow files
+
+on:
+  push:
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+  workflow_call:
+
+permissions:
+  pull-requests: write
+  contents: read
+
+env:
+  REVIEWDOG_REPORTER: ${{ github.event_name == 'pull_request' && 'github-pr-review' || 'github-check' }}
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find PR
+        if: ${{ ! contains(env.REVIEWDOG_REPORTER, 'pr') }}
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.github_token }}
+        run: |
+          pr_number="$(gh api graphql -f query='{
+            repository(name:"${{ github.event.repository.name }}", owner:"${{ github.repository_owner }}") {
+              object(oid:"${{ github.sha }}") {
+                ... on Commit {
+                  associatedPullRequests(first:1) {
+                    nodes {
+                      number
+                    }
+                  }
+                }
+              }
+            }
+          }' --jq '.data.repository.object.associatedPullRequests.nodes[].number')"
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-actionlint@v1.37.1
+        if: ${{ ! steps.pr.outputs.number }}
+        with:
+          fail_on_error: true
+          reporter: ${{ env.REVIEWDOG_REPORTER }}

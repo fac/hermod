@@ -1,3 +1,7 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fac_hermod&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fac_hermod)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=fac_hermod&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=fac_hermod)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=fac_hermod&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=fac_hermod)
+
 # Hermod
 
 [![Gem](https://github.com/fac/hermod/actions/workflows/freeagent-gem.yml/badge.svg)](https://github.com/fac/hermod/actions/workflows/freeagent-gem.yml)

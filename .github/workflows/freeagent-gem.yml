@@ -21,4 +21,7 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Test
+        run: bundle exec rake
+
       - uses: rubygems/release-gem@v1

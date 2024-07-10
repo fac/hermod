@@ -1,19 +1,11 @@
-name: Release Gem
+name: Run Tests
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "lib/hermod/version.rb"
+  pull_request:
 
 jobs:
-  release:
+  tests:
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -23,5 +15,3 @@ jobs:
 
       - name: Test
         run: bundle exec rake
-
-      - uses: rubygems/release-gem@v1

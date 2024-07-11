@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 3.1.0 - 2024-07-11
+### Changed
+- Bumped minimum ruby requirement from 2.5 to 3.0
+- Update nokogiri, rake and libxml versions
+
 ## [3.0.0] - 2023-04-19
 ### Removed
 - Removed support for Ruby 2.0 - 2.4, minimum supported version is now 2.5

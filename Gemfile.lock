@@ -90,7 +90,7 @@ GEM
     pry-byebug (3.11.0)
       byebug (~> 12.0)
       pry (>= 0.13, < 0.16)
-    pry-doc (1.5.0)
+    pry-doc (1.6.0)
       pry (~> 0.11)
       yard (~> 0.9.11)
     racc (1.8.1)
@@ -123,7 +123,7 @@ DEPENDENCIES
   minitest-reporters (~> 1.6)
   nokogiri (~> 1.16)
   pry-byebug (~> 3.11.0)
-  pry-doc (~> 1.5.0)
+  pry-doc (~> 1.6.0)
   rake (~> 13.2)
 
 CHECKSUMS
@@ -167,7 +167,7 @@ CHECKSUMS
   ostruct (0.6.1) sha256=09a3fb7ecc1fa4039f25418cc05ae9c82bd520472c5c6a6f515f03e4988cb817
   pry (0.15.2) sha256=12d54b8640d3fa29c9211dd4ffb08f3fd8bf7a4fd9b5a73ce5b59c8709385b6b
   pry-byebug (3.11.0) sha256=0b0abb7d309bc7f00044d512a3c8567274f7012b944b38becc8440439a1cea72
-  pry-doc (1.5.0) sha256=6d56aeaf0afdb45374511a21dd285f75ea03ec0fa19fe51238a49cfd54c8fa75
+  pry-doc (1.6.0) sha256=19b1ccfac3b4a878f03d6177373a2ea8dda298215bdd121a8929ee5af5460563
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
   rb-fsevent (0.11.2) sha256=43900b972e7301d6570f64b850a5aa67833ee7d87b458ee92805d56b7318aefe

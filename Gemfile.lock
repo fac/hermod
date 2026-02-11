@@ -38,7 +38,7 @@ GEM
     ffi (1.17.3-x86_64-linux-gnu)
     formatador (1.2.3)
       reline
-    guard (2.20.0)
+    guard (2.20.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
       logger (~> 1.6)
@@ -119,7 +119,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.6, >= 2.6.2)
-  guard (~> 2.20.0)
+  guard (~> 2.20.1)
   guard-minitest (~> 2.5.0)
   hermod!
   minitest (~> 5.15)
@@ -147,7 +147,7 @@ CHECKSUMS
   ffi (1.17.3-x86_64-darwin) sha256=1f211811eb5cfaa25998322cdd92ab104bfbd26d1c4c08471599c511f2c00bb5
   ffi (1.17.3-x86_64-linux-gnu) sha256=3746b01f677aae7b16dc1acb7cb3cc17b3e35bdae7676a3f568153fb0e2c887f
   formatador (1.2.3) sha256=19fa898133c2c26cdbb5d09f6998c1e137ad9427a046663e55adfe18b950d894
-  guard (2.20.0) sha256=66829ac0154080f20c6b1d8e6b65c6d5b3f3064ff46f85beb56c82f27b306040
+  guard (2.20.1) sha256=ab9cd7873854e6b76080c0589f781ff3e390e441bdda20165804df54f977015a
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-minitest (2.5.0) sha256=4bc261597b02859196a45fdb3ffde2614aac93a4e6eabc147e6a1e59d5d5f2a0
   hermod (3.3.0)

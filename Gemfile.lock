@@ -49,9 +49,9 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    guard-minitest (2.4.6)
+    guard-minitest (2.5.0)
       guard-compat (~> 1.2)
-      minitest (>= 3.0)
+      minitest (>= 3.0, < 6.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
@@ -120,7 +120,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.6, >= 2.6.2)
   guard (~> 2.20.0)
-  guard-minitest (~> 2.4.6)
+  guard-minitest (~> 2.5.0)
   hermod!
   minitest (~> 5.15)
   minitest-reporters (~> 1.6)
@@ -149,7 +149,7 @@ CHECKSUMS
   formatador (1.2.3) sha256=19fa898133c2c26cdbb5d09f6998c1e137ad9427a046663e55adfe18b950d894
   guard (2.20.0) sha256=66829ac0154080f20c6b1d8e6b65c6d5b3f3064ff46f85beb56c82f27b306040
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
-  guard-minitest (2.4.6) sha256=d89e83d029447c13b191599085d24b6e2fe61e402d275e46491cd3e82f561572
+  guard-minitest (2.5.0) sha256=4bc261597b02859196a45fdb3ffde2614aac93a4e6eabc147e6a1e59d5d5f2a0
   hermod (3.3.0)
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc

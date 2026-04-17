@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hermod (3.3.0)
+    hermod (3.4.0)
       activesupport (> 3.2)
       libxml-ruby (~> 5.0.3)
 
@@ -150,7 +150,7 @@ CHECKSUMS
   guard (2.20.1) sha256=ab9cd7873854e6b76080c0589f781ff3e390e441bdda20165804df54f977015a
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-minitest (2.5.0) sha256=4bc261597b02859196a45fdb3ffde2614aac93a4e6eabc147e6a1e59d5d5f2a0
-  hermod (3.3.0)
+  hermod (3.4.0)
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   libxml-ruby (5.0.6) sha256=ef82ff4b4c6aaaa9629f0a2d5deccd9502507e368bf2c5a98d675f634013ca46

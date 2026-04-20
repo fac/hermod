@@ -5,7 +5,7 @@ gemspec
 
 group :test do
   gem "guard", "~> 2.20.1"
-  gem "guard-minitest", "~> 2.5.0"
+  gem "guard-minitest", "~> 3.0.0"
   gem "pry-byebug", "~> 3.11.0"
   gem "pry-doc", "~> 1.7.0"
 end

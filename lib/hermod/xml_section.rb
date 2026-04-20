@@ -1,4 +1,4 @@
-require 'xml'
+require 'libxml-ruby'
 require 'hermod/xml_section_builder'
 require 'hermod/sanitisation'
 
@@ -22,15 +22,15 @@ module Hermod
 
     attr_reader :attributes
 
-    # Public: turns the XmlSection into an XML::Node instance (from
+    # Public: turns the XmlSection into a LibXML::XML::Node instance (from
     # libxml-ruby). This creates this as a node, adds any attributes (after
     # sanitising them according to HMRC's rules) and then adds child nodes in
     # the order they were defined in the DSL. Nodes that have been called multiple
     # times are added in the order they were called.
     #
-    # Returns an XML::Node
+    # Returns a LibXML::XML::Node
     def to_xml
-      XML::Node.new(self.class.xml_name).tap do |root_node|
+      LibXML::XML::Node.new(self.class.xml_name).tap do |root_node|
         # Add attributes
         attributes.each do |attribute_name, attribute_value|
           sane_value = sanitise_attribute(attribute_value)

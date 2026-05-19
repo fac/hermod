@@ -21,16 +21,16 @@ module Hermod
       @attributes = attributes
     end
 
-    # Internal: turns the XmlNode into an XML::Node including any attributes
+    # Internal: turns the XmlNode into a LibXML::XML::Node including any attributes
     # without any sanitisation (currently - this may change in a future
     # version).
     #
-    # Returns an XML::Node built from the XmlNode object.
+    # Returns a LibXML::XML::Node built from the XmlNode object.
     def to_xml
       if value.respond_to? :to_xml
         value.to_xml
       else
-        XML::Node.new(@name, @value).tap do |node|
+        LibXML::XML::Node.new(@name, @value).tap do |node|
           @attributes.each do |attribute_name, attribute_value|
             node[attribute_name] = attribute_value if attribute_value.present?
           end

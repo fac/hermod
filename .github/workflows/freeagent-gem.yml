@@ -2,10 +2,8 @@ name: Release Gem
 
 on:
   push:
-    branches:
-      - master
     paths:
-      - "lib/hermod/version.rb"
+      - 'lib/hermod/version.rb'
 
 jobs:
   release:
@@ -24,4 +22,14 @@ jobs:
       - name: Test
         run: bundle exec rake
 
-      - uses: rubygems/release-gem@v1
+      - name: Check for pre-release
+        id: is_prerelease
+        run: echo "is_prerelease=$(ruby -e 'puts Gem::Specification.load("hermod.gemspec").version.prerelease?')" >> "$GITHUB_OUTPUT"
+
+      - name: Create a Pre-release
+        if: ${{ github.ref != 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'true' }}
+        uses: rubygems/release-gem@v1
+
+      - name: Create a Release
+        if: ${{ github.ref == 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'false' }}
+        uses: rubygems/release-gem@v1

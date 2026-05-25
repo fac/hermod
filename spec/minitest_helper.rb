@@ -63,7 +63,7 @@ end
 #
 # index - the zero-based index of the node you wish to retrieve
 #
-# Returns an XML::Node (from LibXML)
+# Returns a LibXML::XML::Node
 def node_by_index(index)
   subject.to_xml.to_a[index]
 end

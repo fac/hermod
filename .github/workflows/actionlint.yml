@@ -51,7 +51,7 @@ jobs:
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: reviewdog/action-actionlint@7485c2136bd093d2317a854c72910eebaee35238 # v1.37.1
+      - uses: reviewdog/action-actionlint@6fb7acc99f4a1008869fa8a0f09cfca740837d9d # v1.72.0
         if: ${{ ! steps.pr.outputs.number }}
         with:
           fail_on_error: true

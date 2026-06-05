@@ -14,8 +14,8 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1.310.0
         with:
           bundler-cache: true
 
@@ -28,8 +28,8 @@ jobs:
 
       - name: Create a Pre-release
         if: ${{ github.ref != 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'true' }}
-        uses: rubygems/release-gem@v1
+        uses: rubygems/release-gem@f0d7faff26625599a847d40d9fa28ace24c2aacc # v1
 
       - name: Create a Release
         if: ${{ github.ref == 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'false' }}
-        uses: rubygems/release-gem@v1
+        uses: rubygems/release-gem@f0d7faff26625599a847d40d9fa28ace24c2aacc # v1

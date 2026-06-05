@@ -1,0 +1,11 @@
+name: Check actions have their versions pinned
+
+on:
+  push:
+    paths:
+      - '.github/workflows/*.yml'
+      - '.github/workflows/*.yaml'
+
+jobs:
+  pinact:
+    uses: fac/shared-workflows/.github/workflows/check_pinned_actions.yml@main

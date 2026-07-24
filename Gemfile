@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  gem "guard", "~> 2.20.1"
+  gem "guard", "~> 2.20.2"
   gem "guard-minitest", "~> 3.0.0"
   gem "pry-byebug", "~> 3.12.0"
   gem "pry-doc", "~> 1.7.0"

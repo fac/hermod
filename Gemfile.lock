@@ -8,7 +8,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (8.1.3)
+    activesupport (8.1.3.1)
       base64
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.3.1)
@@ -23,12 +23,12 @@ GEM
       uri (>= 0.13.1)
     ansi (1.6.0)
     base64 (0.3.0)
-    bigdecimal (4.1.1)
+    bigdecimal (4.1.3)
     builder (3.3.0)
     byebug (13.0.0)
       reline (>= 0.6.0)
     coderay (1.1.3)
-    concurrent-ruby (1.3.7)
+    concurrent-ruby (1.3.8)
     connection_pool (3.0.2)
     drb (2.2.3)
     ffi (1.17.4)
@@ -52,10 +52,10 @@ GEM
     guard-minitest (3.0.0)
       guard-compat (~> 1.2)
       minitest (>= 5.0.4, < 7.0)
-    i18n (1.14.8)
+    i18n (1.15.2)
       concurrent-ruby (~> 1.0)
     io-console (0.8.2)
-    json (2.19.9)
+    json (3.0.2)
     libxml-ruby (6.0.0)
     listen (3.10.0)
       logger
@@ -135,15 +135,15 @@ DEPENDENCIES
   rake (~> 13.2)
 
 CHECKSUMS
-  activesupport (8.1.3) sha256=21a5e0dfbd4c3ddd9e1317ec6a4d782fa226e7867dc70b0743acda81a1dca20e
+  activesupport (8.1.3.1) sha256=85458765f25ea48b9019c46b6bb3fa5683197bf4280d9f06710a6e8d7a831376
   ansi (1.6.0) sha256=ac9ea0c0ea8d32fb4e271348e609963ac78882f34b73836c2a02b3622e666658
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
-  bigdecimal (4.1.1) sha256=1c09efab961da45203c8316b0cdaec0ff391dfadb952dd459584b63ebf8054ca
+  bigdecimal (4.1.3) sha256=61ebe1e5e559bdc3cc6f2c0ee7f427321fc838f59611c294356eb04d6e21cf66
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler (4.0.13) sha256=19f08be7f27022cf0b89f27da0b044ae075e8270a9ef44ad248a932614e1ca3b
   byebug (13.0.0) sha256=d2263efe751941ca520fa29744b71972d39cbc41839496706f5d9b22e92ae05d
   coderay (1.1.3) sha256=dc530018a4684512f8f38143cd2a096c9f02a1fc2459edcfe534787a7fc77d4b
-  concurrent-ruby (1.3.7) sha256=4412caec3a5ea2e5fdc52076724c071a81f2c0593d83b2ac8cbb8ca63b3151b0
+  concurrent-ruby (1.3.8) sha256=b2f1be836e968ccc78ccfce277ea79c72a88633f22306782c16ff23fb415d1e1
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
   drb (2.2.3) sha256=0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373
   ffi (1.17.4) sha256=bcd1642e06f0d16fc9e09ac6d49c3a7298b9789bcb58127302f934e437d60acf
@@ -156,9 +156,9 @@ CHECKSUMS
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-minitest (3.0.0) sha256=0c418e62a4081a429e4e66ad094a3b66f113423542b43ad7b2df0c87f19d5728
   hermod (3.5.0)
-  i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
+  i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
-  json (2.19.9) sha256=9b9025b7cdddafa38d316eca0b2358488e42d417045c1b90d216a9fefe46b79a
+  json (3.0.2) sha256=8e6d7e7b11384c21230430cef90b71f14849a34a1f4452796670f7c981bd19df
   libxml-ruby (6.0.0) sha256=a9d9458d018dee591d0995fdc1110cd67ec32b7be67d36fdb9e0b01a4ca9dac4
   listen (3.10.0) sha256=c6e182db62143aeccc2e1960033bebe7445309c7272061979bb098d03760c9d2
   logger (1.7.0) sha256=196edec7cc44b66cfb40f9755ce11b392f21f7967696af15d274dde7edff0203

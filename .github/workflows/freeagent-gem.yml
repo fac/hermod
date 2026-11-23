@@ -28,8 +28,8 @@ jobs:
 
       - name: Create a Pre-release
         if: ${{ github.ref != 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'true' }}
-        uses: rubygems/release-gem@7f9650160c1a4e7989fdc9855807bdbd421d8b6b # v1
+        uses: rubygems/release-gem@5c53f5308233b7c0f47411f0471b3faae6fa57b2 # v1
 
       - name: Create a Release
         if: ${{ github.ref == 'refs/heads/master' && steps.is_prerelease.outputs.is_prerelease == 'false' }}
-        uses: rubygems/release-gem@7f9650160c1a4e7989fdc9855807bdbd421d8b6b # v1
+        uses: rubygems/release-gem@5c53f5308233b7c0f47411f0471b3faae6fa57b2 # v1
